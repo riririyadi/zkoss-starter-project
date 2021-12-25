@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <style>
+        .session_on{
+        background-image: url("https://cdn.dribbble.com/users/1070543/screenshots/14313314/media/f889590808c8276da6aa9212c66fb81f.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        }
+    </style>
+    <div sclass="session_on">
+    <label style="font-size: 30pt; font-weight: bold">You are in the middle of session.</label>
+    </div>
+</zk>

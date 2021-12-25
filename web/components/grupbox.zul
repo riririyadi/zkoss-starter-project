@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+<window 
+    title="Detail Form" 
+    id="detailForm" 
+    width=""
+    height="" 
+    apply="controller.DetailController"
+    closable="true"
+    action="show: slideDown;hide: slideUp"
+>
+	
+ <vlayout spacing="15px">
+        <hlayout spacing="15px">
+            <groupbox id="gb1" width="300px" onOpen="">
+                <caption>
+                    Partner
+                </caption>
+                <vbox  align="end">
+                    <div>
+                    <hbox align="center"> 
+                        <label value="BP Group" /> 
+                        <textbox value="" />
+                    </hbox>
+                    <hbox> 
+                        <label value="Partner Code" /> 
+                        <textbox value="" />
+                    </hbox>
+                    <hbox> 
+                        <label value="Partner Description" /> 
+                        <textbox value="" />
+                    </hbox>
+                    <hbox>
+                        <label value="Partner Category" /> 
+                        <textbox value="" />
+                    </hbox>
+                    </div>
+                </vbox>
+            </groupbox>
+            <groupbox id="gb2" width="300px">
+                <caption>Company</caption>
+                <vbox align="end">
+                    <div>              
+                <hbox>
+                    <label value="Company Code" />
+                    <textbox value="" />
+                </hbox>
+                 <hbox>
+                    <label value="Company Description" />
+                    <textbox value="" />
+                </hbox>
+                <hbox>
+                    <div style="margin-right: 120px">
+                        <label value="One Time Partner" />
+                        <checkbox />
+                    </div>
+                </hbox>
+                    </div>
+                </vbox>
+            </groupbox>
+        </hlayout>
+    </vlayout>
+    <vlayout spacing="15px">
+        <hlayout spacing="15px">
+            <groupbox id="gb3" width="300px" onOpen="">
+                <caption>
+                   Business Partner Address
+                </caption>
+                <vbox align="end">                
+                <div style="padding-left: 20px">     
+                <hbox align="center">
+                    <label value="Address" />
+                    <textbox value="" />
+                </hbox>
+                <hbox>
+                    <label value="Country" />
+                    <textbox value="" />
+                </hbox>
+                   <hbox>
+                    <label value="Province" />
+                    <textbox value="" />
+                </hbox>
+                   <hbox>
+                    <label value="City" />
+                    <textbox value="" />
+                </hbox>
+                  <hbox>
+                    <label value="ZIP code" />
+                    <textbox value="" />
+                </hbox>
+                </div>
+                </vbox>
+            </groupbox>
+            <groupbox id="gb4" width="300px">
+                    
+                <caption>Contact Person</caption>
+                <vbox align="end">
+                    <div style="padding-left: 20px">                     
+               <hbox>
+                    <label value="Name" />
+                    <textbox value="" />
+                </hbox>
+                <hbox>
+                    <label value="Phone Number" />
+                    <textbox value="" />
+                </hbox>
+                   <hbox>
+                    <label value="Email" />
+                    <textbox value="" />
+                </hbox>
+                   <hbox>
+                    <label value="NPWP" />
+                    <textbox value="" />
+                </hbox>
+                    </div>
+                </vbox>
+            </groupbox>
+        </hlayout>
+    </vlayout>
+    <toolbar align="center">
+     
+     <button id="btnNew" image="/img/New24.png" label="New"/>    
+    <button id="btnSave" image="/img/Edit24.png" label="Save"/>       
+    <button id="btnDelete" image="/img/Delete24.png"  label="Delete"/>
+    <button id="btnClose" image="/img/Cancel24.png"  label="Cancel"/>
+
+    </toolbar>
+
+
+</window>
+</zk>

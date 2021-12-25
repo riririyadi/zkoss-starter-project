@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <style>
+        .header{
+            background-color: #D7E4ED;
+            padding: 20px;
+            display:flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: -1px 8px 10px -1px rgba(0,0,0,0.35);
+
+        }
+        .btn-logout{
+            border-radius: 10px; 
+            padding:5px 20px; 
+            border:none; 
+            background: #779dd9;
+      
+            font-weight: bold;
+            color: white;
+        }
+        .btn-logout:hover{
+            background: #92b6f0;
+        }
+        .btn-logout:active {
+                 box-shadow:none;
+                
+        }
+    </style>
+    <div sclass="header" apply="controller.LogoutController">
+        <div>
+            <image id="img" width="150px" height="30px" src="https://logodownload.org/wp-content/uploads/2021/10/meta-logo.png"/>
+        </div>
+        <div>
+            <div style="display: flex; justify-content: center; align-items:center"><image src="/img/user-24.png"/>
+            <label value="${sessionScope.userCredential.name}" 
+                   if="${not sessionScope.userCredential.anonymous}" style="margin: 0px 5px">
+            </label>
+            <button id="logout" label="Logout" style="margin: 0px 10px"
+            if="${not sessionScope.userCredential.anonymous}" sclass="btn-logout"/>
+            </div>
+          
+        </div>
+</div>
+</zk>

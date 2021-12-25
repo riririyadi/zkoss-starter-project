@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?init class="controller.LoginAuth"?>
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <style>
+        .login{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+           
+        }
+        .login-form{
+            background-image: linear-gradient(to bottom right, #0000ff, #529da8);
+            height: 300px;
+            width: 250px;
+            padding: 20px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+        }
+        .btn-login{
+            width: 100%; 
+            margin-top: 20px;
+            border: none;
+           
+            border-radius: 10px;
+            padding: 10px 0px;
+            background: #779dd9;
+           
+            font-weight: bold;
+            color: white;
+        }
+        
+         .btn-login:hover{
+            
+            background: #92b6f0;
+          
+        }
+        .btn-login:active {
+          box-shadow:none;
+       
+        }
+        .description{
+            width: 200px;
+            background: white;
+            background-image: url("https://i.pinimg.com/474x/6f/f9/17/6ff917e4cf97b52d7913fe59d4146fe6.jpg");
+            height: 300px;
+            padding: 20px;
+            background-size: 90%;
+            background-repeat: no-repeat;
+            background-position-y: 40%;            
+            background-position-x: 40%;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+    </style>
+    <div sclass="login" apply="controller.LoginController" id="loginWin">
+        <div sclass="login-form">
+          <div style="width: 100%; justify-content: center; align-items: center; display: flex">
+            <image id="img" width="150px" height="30px" src="https://logodownload.org/wp-content/uploads/2021/10/meta-logo.png"/>
+        </div>
+        <div style="margin: 20px 0px; text-align:center; width: 100%" >
+            <label style="color:white; font-size: 20px; font-weight: bold"> WELCOME</label>
+        </div>
+       <vbox width="100%">
+           <label id="message" value=" "/>
+           <label style="color: white">Email</label>           
+           <textbox id="email" height="20px" constraint="/.+@.+\.[a-z]+/: Please enter your e-mail address" style="width: 98%; padding: 5px 0px 5px 5px"/>
+           <label style="color: white">Password</label>
+           <textbox id="password"  type="password" height="20px"  style="width: 98%; padding: 5px 0px 5px 5px" constraint="no empty: Please enter your password"/>
+           <button label="Login" sclass="btn-login" id="login"/>
+        </vbox>
+        </div>
+        <div sclass="description">
+
+        </div>
+    </div>
+</zk>

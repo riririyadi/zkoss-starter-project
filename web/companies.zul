@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+      <style>
+        .company-label{
+            font-size: 20px;
+          
+        }
+                  
+        .search{
+            border-radius: 10px; 
+            border: none;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            height: 25px;
+            padding: 0px 15px;
+        }
+        
+        .listbox-wrapper{
+    
+        border: none;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+        
+        .btnNew, .btnEdit, .btnRefresh, .btnFind{
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+        
+        div.z-listbox {
+            background: #ffffff; 
+            border: 1px solid #bbb; 
+            overflow: hidden; 
+            zoom: 1;
+        }
+        tr.z-listitem {background-color:#ffffff;}
+        tr.z-listitem td.z-listitem-focus {background-image: none;}
+        tr.z-listitem-seld {
+            background-color: #84C5D6;
+            border: none;
+            -moz-box-shadow: 0 0 5px 2px #59ACC1 inset;
+            -webkit-box-shadow: 0 0 5px 2px #59ACC1 inset;
+            box-shadow: 0 0 5px 2px #59ACC1 inset;
+            color: #59ACC1;
+            text-shadow: 1px 1px 1px #E3F6F9;
+        }
+tr.z-listitem-over {
+  background-color: #84C5D6;
+  border: none;
+  color: #E3F6F9;
+  cursor: pointer;
+  text-shadow: 1px 1px 1px #59ACC1;
+}
+tr.z-listitem-over-seld {background: #84C5D6;} 
+    </style>
+<div style="padding: 20px" apply="controller.ListCompaniesController">
+    <label sclass="company-label">Companies</label>
+          <div style="margin: 20px 0px; display: flex; justify-content: space-between">
+                        <div>
+                        <button id="btnNewCompany"  sclass="btnNew"   image="/img/New24.png"     tooltiptext="New"/>
+                        <button id="btnRefreshCompany" sclass="btnRefresh"  image="/img/Refresh24.png" tooltiptext="Refresh" />
+                        </div>
+                        <div>
+                        <button id="btnFindCompany"   sclass="btnFind"   image="/img/Find24.png"    tooltiptext="Find"  visible="true"/>
+                        <textbox id="searchCompany" sclass="search"/>  
+                        </div>
+                    </div>
+
+                  <div sclass="listbox-wrapper">
+               
+                    <listbox id="listboxCompanies" vflex="1" mold="paging" autopaging="true" style="border: none; background: white" height="380px">
+                        <!--<frozen columns="4"/>-->
+                        <listhead sizable="true">
+                            <listheader style="text-align: center" label="Delete"   align="center"    width="70px"/>                            
+                            <listheader style="text-align: center" label="Edit"   align="center"    width="70px"/>
+                            <listheader style="text-align: center" sort="auto(company_code)"          label="Company Code"           align="left"    hflex="min"/>
+                            <listheader style="text-align: center" sort="auto(company_description)"   label="Company Description"    align="left"   width="150px"/>
+                            <listheader style="text-align: center" sort="auto(company_address)"       label="Company Address"        align="left"    width="200px"/>
+                            <listheader style="text-align: center" sort="auto(email)"              label="Email"               align="left"    hflex="min"/>
+                            <listheader style="text-align: center" sort="auto(phone_number)"       label="Phone Number"        align="left"    width="150px"/>
+                            <listheader style="text-align: left" sort="auto(zip_code)"          label="Zip Code"        width="100%"   align="left"    hflex="max"/>
+                        </listhead>
+                    </listbox>
+                     </div> </div>
+            <div style="padding: 0; margin-top: 50px">
+              <include src="/footer.zul"/>
+          </div>
+</zk>

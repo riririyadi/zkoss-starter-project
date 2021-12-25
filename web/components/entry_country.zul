@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+ 
+<window 
+        id="entry_country" 
+        width=""  
+        height="" 
+        apply="controller.CountryController"
+        closable="true"
+        action="show: slideDown;hide: slideUp"
+>
+    <hlayout style="padding: 20px">
+            <vbox align="end">
+                <hbox>
+                        <label id="" value="Country Code" style="float: right"/>    
+                        <textbox value="" id="country_code" maxlength="5" constraint="no empty"/>
+                </hbox>
+                <hbox>
+                        <label id="" value="Country Description" style="float: right"/>
+                        <textbox value="" id="country_description" constraint="no empty"/>
+                </hbox>
+                <div style="margin-right: 25%; margin-top: 20px">
+                <hbox>
+                     <button image="/img/Save24.png" label="Save" id="btnSave" onClick=""/>
+                    <button image="/img/Cancel24.png" label="Cancel" id="btnClose" onClick=""/> 
+                </hbox>
+                </div>
+            </vbox>
+    </hlayout>
+</window>
+</zk>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns="http://www.zkoss.org/2005/zul" xmlns:h="http://www.w3.org/1999/xhtml">
+    <window id="lov" width="1050px" mode="modal" apply="${arg.composerLov}" position="center,center" style="border:1px;background:#3366FF">
+        <caption style="color:#FFFFFF"/>
+        <div class="panel" align="center" style="padding: 0px; margin: 10px; background:#3366FF;">
+            <grid hflex="1" style="border:0px;background:#3366FF;">
+                <columns style="border:1px;background:#3366FF;">
+                    <column label="" align="right" width="15%"/>
+                    <column label="" align="left"  width="65%"/>
+                    <column label="" align="right" width="20%"/>
+                </columns>
+                <rows>
+                    <row style="border:0px;background:#3366FF;">
+                        <label value="Keyword:" style="color:#FFFFFF;"/>
+                        <textbox id="txtFind"   width="100%" value="%"/>
+                        <button  id="btnFind" label="Search" image="/img/search.png" width="100%"/>
+                    </row>
+                </rows>
+            </grid>
+        </div>
+            
+        <div class="panel" align="center" style="padding: 0px; margin: 10px;">
+            <grid id="gridLov" >                
+                <columns id="gridColumnsHeader"  style="text-align: center; border:0px;background:#3366FF;color:#FFFFFF;">  
+                </columns>
+                <rows id="rows" >
+                </rows>   
+            </grid>
+            <paging id="userPaging" pageSize="10" style="text-align: center; border:1px;"/>
+        </div>
+            
+        <div class="panel" align="center" style="padding: 0px; margin: 10px;">
+            <grid hflex="1" style="border:0px;">
+                <columns>
+                    <column label="" align="right"/>
+                    <column label="" align="left"/>
+                </columns>
+                <rows>
+                    <row style="border:0px;background:#3366FF;">	
+                        <button id="btnOk" label="Submit" orient="horizontal" width="120px" height="30px"/>
+                        <button id="btnClose" label="Cancel" orient="horizontal" width="120px" height="30px"/>
+                    </row>
+                </rows>
+            </grid>
+        </div>
+    </window>
+</zk>

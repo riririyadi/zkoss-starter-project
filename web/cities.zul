@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+      <style>
+        .city-label{
+            font-size: 20px;
+        
+        }
+                  
+        .search{
+            border-radius: 10px; 
+            border: none;
+<!--            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);-->
+            height: 25px;
+            padding: 0px 15px;
+          background: #D7E4ED;
+        }
+        
+        .listbox-wrapper{
+    
+        border: none;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+        
+        .btnNew, .btnEdit, .btnRefresh, .btnFind{
+            border: none;
+          border-radius: 10px; 
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+        
+      div.z-listbox {
+  background: #ffffff; 
+  border: 1px solid #bbb; 
+  overflow: hidden; 
+  zoom: 1;
+}
+tr.z-listitem {background-color:#ffffff;}
+tr.z-listitem td.z-listitem-focus {background-image: none;}
+tr.z-listitem-seld {
+  background-color: #84C5D6;
+  border: none;
+  -moz-box-shadow: 0 0 5px 2px #59ACC1 inset;
+  -webkit-box-shadow: 0 0 5px 2px #59ACC1 inset;
+  box-shadow: 0 0 5px 2px #59ACC1 inset;
+  color: #59ACC1;
+  text-shadow: 1px 1px 1px #E3F6F9;
+}
+tr.z-listitem-over {
+  background-color: #84C5D6;
+  border: none;
+  color: #E3F6F9;
+  cursor: pointer;
+  text-shadow: 1px 1px 1px #59ACC1;
+}
+tr.z-listitem-over-seld {background: #84C5D6;} 
+    </style>
+<div style="padding: 20px" apply="controller.ListCitiesController">
+    <div style="margin: 20px 0px; display: flex; justify-content: space-between;">
+        <div>
+            <label sclass="city-label">Cities</label>
+        </div>
+        <div>
+                            <button id="btnNewCity" style="border: none; background: none" sclass=""   image="/img/New24.png"     tooltiptext="New"/>
+                            <button id="btnRefreshCity" style="border: none; background: none" sclass=""  image="/img/Refresh24.png" tooltiptext="Refresh" />
+                            <button id="btnFindCity"  style="border: none; background: none"  sclass=""   image="/img/Find24.png"    tooltiptext="Find" onClick="div.visible=!div.visible" visible="true"/>
+        </div>
+         </div>
+        
+                            <div id="div" visible="false" style="margin-bottom: 20px;">
+                           
+                                  <label style="margin-right: 10px">Province</label><textbox id="province" sclass="search" /><button style="border: none; background: none "  image="/img/Find24.png"/>
+                           
+                                    <label style="margin-right: 10px">Country</label><textbox id="country" sclass="search" /><button style="border: none; background: none"  image="/img/Find24.png"/>
+                                
+                              
+                            </div>
+                <div sclass="listbox-wrapper">
+                    <listbox id="listboxCities" vflex="1" mold="paging" autopaging="true" style=" border: none"   height="380px">
+                        <!--<frozen columns="4"/>-->
+                        <listhead sizable="true" style="border: none" >
+                            <listheader style="text-align: center; " label="Delete"   align="center"    width="70px"/>                            
+                            <listheader style="text-align: center;" label="Edit"   align="center"    width="70px"/>
+                            <listheader style="text-align: center;" sort="auto(city_code)"          label="City Code"           align="left"    hflex="min"/>
+                            <listheader style="text-align: left;" sort="auto(city_description)"   label="City Description" width="100%"    align="left"    hflex="max"/>
+                        </listhead>
+                    </listbox>
+                    </div>
+</div>            <div style="padding: 0; margin-top: 50px">
+              <include src="/footer.zul"/>
+          </div>
+</zk>

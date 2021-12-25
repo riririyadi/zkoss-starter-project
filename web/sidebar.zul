@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <style>
+     
+        .sidebar-fn{
+            background: #f1f1f1;
+            cursor: pointer;
+            height: 30px;
+            padding-left: 20px;
+
+        }
+        .avatar{
+            border-radius: 50%;
+            padding: 10px;
+            border: none;
+            margin: 10px;
+        }
+
+        .logo{
+            margin-left: 10px;
+            margin-top: 10px;
+        }
+
+    </style>
+    <div style="display:flex;justify-content: end; align-items: end; width: 100%"  >
+        
+    <button id="collapsed" image="/img/left-16.png" style="border: none; background: none; margin: 10px" />
+    </div>
+
+    <grid id="sidebar" sclass="sidebar" style="border: none; margin-top: 100px; background: transparent" oddRowSclass="none"
+            apply="controller.SidebarAjaxbasedController"
+    >
+        <columns style="border: none" sizable="false">
+             <column style="border: none; background: #f1f1f1;" align="center" width="50px"/>
+             <column style="border: none" />
+         </columns>
+        <rows ></rows>
+
+    </grid>
+    
+<!--      <button label="Logout" sclass="btn-logout"/>-->
+
+</zk>

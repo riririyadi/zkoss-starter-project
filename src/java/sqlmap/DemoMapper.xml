@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="mapper" >
+
+    <select id="getListItems" parameterType="map" resultType="model.Item">
+	Select *
+	From   items
+    </select>
+    
+    
+    <select id="findListItems" parameterType="map" resultType="model.Item">
+        
+        SELECT
+	* 
+        FROM
+	items
+        <if test="psearch != null">
+            <bind name="pattern" value="'%' + psearch + '%'" />
+              WHERE LOWER(description) LIKE #{pattern} OR LOWER(code) LIKE #{pattern}
+        </if>
+	
+         
+    </select>
+
+            
+    <select id="items_oninsert" parameterType="map" statementType="CALLABLE">
+    	{ CALL items_oninsert(
+	    	#{pcode,                      mode=IN,  jdbcType=VARCHAR},
+	    	#{pdescription,               mode=IN,  jdbcType=VARCHAR},
+           	#{puom,                       mode=IN,  jdbcType=VARCHAR},           	
+                #{pprice,                     mode=IN,  jdbcType=NUMERIC},
+	    	#{outid,                      mode=OUT, jdbcType=BIGINT},
+	    	#{outerr,                     mode=OUT, jdbcType=INTEGER},
+	    	#{outmsg,                     mode=OUT, jdbcType=VARCHAR}
+            )
+        }
+    </select>
+    
+     <select id="items_onupdate" parameterType="map" statementType="CALLABLE">
+    	{ CALL items_onupdate(
+	    	#{pid,                        mode=IN,  jdbcType=BIGINT},
+	    	#{pcode,                      mode=IN,  jdbcType=VARCHAR},
+	    	#{pdescription,               mode=IN,  jdbcType=VARCHAR},	    
+                #{puom,                       mode=IN,  jdbcType=VARCHAR},         
+                #{pprice,                     mode=IN,  jdbcType=NUMERIC},
+	    	#{outerr,                     mode=OUT, jdbcType=INTEGER},
+	    	#{outmsg,                     mode=OUT, jdbcType=VARCHAR}
+            )
+        }
+    </select>
+
+   <select id="items_ondelete" parameterType="map" statementType="CALLABLE">
+    	{ CALL items_ondelete(
+	    	#{pid,                        mode=IN,  jdbcType=BIGINT},
+	    	#{outerr,                     mode=OUT, jdbcType=INTEGER},
+	    	#{outmsg,                     mode=OUT, jdbcType=VARCHAR}
+            )
+        }
+    </select>
+    
+    <select id="getListCities" parameterType="map" resultType="model.City">
+	Select c.id as id, province_id, province_code, province_description, city_code, city_description
+	From   cities c inner join provinces p on c.province_id = p.id
+    </select>
+    
+    <select id="findListCities" parameterType="map" resultType="model.City">
+        
+        SELECT
+	* 
+        FROM
+	cities
+        <if test="psearch != null">
+            <bind name="pattern" value="'%' + psearch + '%'" />
+              WHERE LOWER(city_description) LIKE #{pattern} OR LOWER(city_code) LIKE #{pattern}
+        </if>
+	
+         
+    </select>
+    
+     <select id="cities_oninsert" parameterType="map" statementType="CALLABLE">
+    	{ CALL cities_oninsert(
+                #{pprovince_id,                    mode=IN,  jdbcType=BIGINT},
+                #{pcity_code,                      mode=IN,  jdbcType=VARCHAR},
+	    	#{pcity_description,               mode=IN,  jdbcType=VARCHAR},
+	    	#{outid,                           mode=OUT, jdbcType=BIGINT},
+	    	#{outerr,                          mode=OUT, jdbcType=INTEGER},
+	    	#{outmsg,                          mode=OUT, jdbcType=VARCHAR}
+            )
+        }
+    </select>
+    
+    <select id="cities_onupdate" parameterType="map" statementType="CALLABLE">
+    	{ CALL cities_onupdate(
+                #{pid,                             mode=IN,  jdbcType=BIGINT},                
+                #{pprovince_id,                    mode=IN,  jdbcType=BIGINT},
+                #{pcity_code,                      mode=IN,  jdbcType=VARCHAR},
+	    	#{pcity_description,               mode=IN,  jdbcType=VARCHAR},
+	    	#{outerr,                          mode=OUT, jdbcType=INTEGER},
+	    	#{outmsg,                          mode=OUT, jdbcType=VARCHAR}
+            )
+        }
+    </select>
+    
+       <select id="cities_ondelete" parameterType="map" statementType="CALLABLE">
+    	{ CALL cities_ondelete(
+	    	#{pid,                        mode=IN,  jdbcType=BIGINT},
+	    	#{outerr,                     mode=OUT, jdbcType=INTEGER},
+	    	#{outmsg,                     mode=OUT, jdbcType=VARCHAR}
+            )
+        }
+    </select>
+    
+    <select id="getListCompanies" parameterType="map" resultType="model.Company">
+	select cmp.id as id, cmp.*, country_code, country_description, province_code, province_description,
+        city_code, city_description
+        from companies cmp join countries c on cmp.country_id = c.id join provinces p on cmp.province_id = p.id
+        join cities ct on cmp.city_id = ct.id
+    </select>
+    
+    <select id="findListCompanies" parameterType="map" resultType="model.City">
+        
+        SELECT
+	* 
+        FROM
+	companies
+        <if test="psearch != null">
+            <bind name="pattern" value="'%' + psearch + '%'" />
+              WHERE LOWER(company_description) LIKE #{pattern} OR LOWER(company_code) LIKE #{pattern}
+        </if>
+	
+         
+    </select>
+    
+    <select id="companies_oninsert" parameterType="map" statementType="CALLABLE">
+    	{ CALL companies_oninsert(
+                #{pcompany_code,                   mode=IN,  jdbcType=VARCHAR},
+                #{pcompany_description,            mode=IN,  jdbcType=VARCHAR},
+	    	#{pcompany_address,                mode=IN,  jdbcType=VARCHAR},	    	
+                #{pcountry_id,                     mode=IN,  jdbcType=BIGINT},                
+                #{pprovince_id,                    mode=IN,  jdbcType=BIGINT},                
+                #{pcity_id,                        mode=IN,  jdbcType=BIGINT},
+                #{pzip_code,                       mode=IN,  jdbcType=VARCHAR},                
+                #{pemail,                          mode=IN,  jdbcType=VARCHAR},                
+                #{pphone_number,                   mode=IN,  jdbcType=VARCHAR},          
+             	#{outid,                           mode=OUT, jdbcType=BIGINT},
+	    	#{outerr,                          mode=OUT, jdbcType=INTEGER},
+	    	#{outmsg,                          mode=OUT, jdbcType=VARCHAR}
+            )
+        }
+    </select>
+    
+    <select id="companies_onupdate" parameterType="map" statementType="CALLABLE">
+    	{ CALL companies_onupdate(
+                #{pid,                             mode=IN,  jdbcType=BIGINT},                
+                #{pcompany_code,                   mode=IN,  jdbcType=VARCHAR},
+                #{pcompany_description,            mode=IN,  jdbcType=VARCHAR},
+	    	#{pcompany_address,                mode=IN,  jdbcType=VARCHAR},	    	
+                #{pcountry_id,                     mode=IN,  jdbcType=BIGINT},                
+                #{pprovince_id,                    mode=IN,  jdbcType=BIGINT},                
+                #{pcity_id,                        mode=IN,  jdbcType=BIGINT},
+                #{pzip_code,                       mode=IN,  jdbcType=VARCHAR},                
+                #{pemail,                          mode=IN,  jdbcType=VARCHAR},                
+                #{pphone_number,                   mode=IN,  jdbcType=VARCHAR},          
+	    	#{outerr,                          mode=OUT, jdbcType=INTEGER},
+	    	#{outmsg,                          mode=OUT, jdbcType=VARCHAR}
+            )
+        }
+    </select>
+
+   <select id="companies_ondelete" parameterType="map" statementType="CALLABLE">
+    	{ CALL companies_ondelete(
+	    	#{pid,                        mode=IN,  jdbcType=BIGINT},
+	    	#{outerr,                     mode=OUT, jdbcType=INTEGER},
+	    	#{outmsg,                     mode=OUT, jdbcType=VARCHAR}
+            )
+        }
+    </select>
+    
+    <select id="getListCountries" parameterType="map" resultType="model.Country">
+	Select *
+	From   countries
+    </select>
+    
+    <select id="findListCountries" parameterType="map" resultType="model.Country">
+        
+        SELECT
+	* 
+        FROM
+	countries
+        <if test="psearch != null">
+            <bind name="pattern" value="'%' + psearch + '%'" />
+              WHERE LOWER(country_code) LIKE #{pattern} OR LOWER(country_description) LIKE #{pattern}
+        </if>
+	
+    </select>
+
+    
+    
+    <select id="countries_oninsert" parameterType="map" statementType="CALLABLE">
+    	{ CALL countries_oninsert(
+                #{pcountry_code,                   mode=IN,  jdbcType=VARCHAR},
+	    	#{pcountry_description,            mode=IN,  jdbcType=VARCHAR},
+	    	#{outid,                           mode=OUT, jdbcType=BIGINT},
+	    	#{outerr,                          mode=OUT, jdbcType=INTEGER},
+	    	#{outmsg,                          mode=OUT, jdbcType=VARCHAR}
+            )
+        }
+    </select>
+    
+     <select id="countries_onupdate" parameterType="map" statementType="CALLABLE">
+    	{ CALL countries_onupdate(
+                #{pid,                             mode=IN,  jdbcType=BIGINT},                
+                #{pcountry_code,                   mode=IN,  jdbcType=VARCHAR},
+	    	#{pcountry_description,            mode=IN,  jdbcType=VARCHAR},
+	    	#{outerr,                          mode=OUT, jdbcType=INTEGER},
+	    	#{outmsg,                          mode=OUT, jdbcType=VARCHAR}
+            )
+        }
+    </select>
+    
+    <select id="countries_ondelete" parameterType="map" statementType="CALLABLE">
+    	{ CALL countries_ondelete(
+	    	#{pid,                        mode=IN,  jdbcType=BIGINT},
+	    	#{outerr,                     mode=OUT, jdbcType=INTEGER},
+	    	#{outmsg,                     mode=OUT, jdbcType=VARCHAR}
+            )
+        }
+    </select>
+    
+      <select id="getListCustomers" parameterType="map" resultType="model.Customer">
+	select cm.*, country_code, country_description, province_code, province_description,
+    city_code, city_description, company_code, company_description
+    from customers cm join countries c on cm.country_id = c.id join provinces p on cm.province_id = p.id
+    join cities ct on cm.city_id = ct.id join companies cmp on cm.company_id = cmp.id
+    </select>
+    
+    
+    <select id="findListCustomers" parameterType="map" resultType="model.Customer">
+        
+        SELECT
+	* 
+        FROM
+	customers
+        <if test="psearch != null">
+            <bind name="pattern" value="'%' + psearch + '%'" />
+              WHERE LOWER(customer_description) LIKE #{pattern} OR LOWER(customer_code) LIKE #{pattern}
+        </if>
+	
+         
+    </select>
+    
+      <select id="customers_oninsert" parameterType="map" statementType="CALLABLE">
+    	{ CALL customers_oninsert(
+                #{pcustomer_code,                  mode=IN,  jdbcType=VARCHAR},
+                #{pcustomer_description,           mode=IN,  jdbcType=VARCHAR},
+	    	#{pcustomer_address,               mode=IN,  jdbcType=VARCHAR},	    	
+                #{pcountry_id,                     mode=IN,  jdbcType=BIGINT},                            
+                #{pprovince_id,                    mode=IN,  jdbcType=BIGINT},                
+                #{pcity_id,                        mode=IN,  jdbcType=BIGINT},
+                #{pzip_code,                       mode=IN,  jdbcType=VARCHAR},                
+                #{pcontact_person,                 mode=IN,  jdbcType=VARCHAR},                
+                #{pphone_number,                   mode=IN,  jdbcType=VARCHAR},          
+                #{pemail,                          mode=IN,  jdbcType=VARCHAR}, 
+                #{pcompany_id,                     mode=IN,  jdbcType=BIGINT},                               
+             	#{outid,                           mode=OUT, jdbcType=BIGINT},
+	    	#{outerr,                          mode=OUT, jdbcType=INTEGER},
+	    	#{outmsg,                          mode=OUT, jdbcType=VARCHAR}
+            )
+        }
+    </select>
+    
+    <select id="customers_onupdate" parameterType="map" statementType="CALLABLE">
+    	{ CALL customers_onupdate(
+                #{pid,                             mode=IN,  jdbcType=BIGINT},                
+                #{pcustomer_code,                  mode=IN,  jdbcType=VARCHAR},
+                #{pcustomer_description,           mode=IN,  jdbcType=VARCHAR},
+	    	#{pcustomer_address,               mode=IN,  jdbcType=VARCHAR},	    	
+                #{pcountry_id,                     mode=IN,  jdbcType=BIGINT},                            
+                #{pprovince_id,                    mode=IN,  jdbcType=BIGINT},                
+                #{pcity_id,                        mode=IN,  jdbcType=BIGINT},
+                #{pzip_code,                       mode=IN,  jdbcType=VARCHAR},                
+                #{pcontact_person,                 mode=IN,  jdbcType=VARCHAR},                
+                #{pphone_number,                   mode=IN,  jdbcType=VARCHAR},          
+                #{pemail,                          mode=IN,  jdbcType=VARCHAR}, 
+                #{pcompany_id,                     mode=IN,  jdbcType=BIGINT},                               
+	    	#{outerr,                          mode=OUT, jdbcType=INTEGER},
+	    	#{outmsg,                          mode=OUT, jdbcType=VARCHAR}
+            )
+        }
+    </select>
+
+   <select id="customers_ondelete" parameterType="map" statementType="CALLABLE">
+    	{ CALL customers_ondelete(
+	    	#{pid,                        mode=IN,  jdbcType=BIGINT},
+	    	#{outerr,                     mode=OUT, jdbcType=INTEGER},
+	    	#{outmsg,                     mode=OUT, jdbcType=VARCHAR}
+            )
+        }
+    </select>
+    
+     
+    <select id="getListProvinces" parameterType="map" resultType="model.Province">
+	Select p.id as id, country_id, province_code, province_description, country_code, country_description
+	From   provinces p inner join countries c on p.country_id = c.id
+    </select>
+    
+    
+    <select id="findListProvinces" parameterType="map" resultType="model.Province">
+        
+        SELECT
+	* 
+        FROM
+	provinces
+        <if test="psearch != null">
+            <bind name="pattern" value="'%' + psearch + '%'" />
+              WHERE LOWER(province_code) LIKE #{pattern} OR LOWER(province_description) LIKE #{pattern}
+        </if>
+	
+    </select>
+    
+     <select id="provinces_oninsert" parameterType="map" statementType="CALLABLE">
+    	{ CALL provinces_oninsert(
+                #{pcountry_id,                    mode=IN,  jdbcType=BIGINT},
+                #{pprovince_code,                 mode=IN,  jdbcType=VARCHAR},
+	    	#{pprovince_description,          mode=IN,  jdbcType=VARCHAR},
+	    	#{outid,                          mode=OUT, jdbcType=BIGINT},
+	    	#{outerr,                         mode=OUT, jdbcType=INTEGER},
+	    	#{outmsg,                         mode=OUT, jdbcType=VARCHAR}
+            )
+        }
+    </select>
+    
+    <select id="provinces_onupdate" parameterType="map" statementType="CALLABLE">
+    	{ CALL provinces_onupdate(
+                #{pid,                             mode=IN,  jdbcType=BIGINT},                
+                #{pcountry_id,                    mode=IN,  jdbcType=BIGINT},
+                #{pprovince_code,                 mode=IN,  jdbcType=VARCHAR},
+	    	#{pprovince_description,          mode=IN,  jdbcType=VARCHAR},
+		#{outerr,                          mode=OUT, jdbcType=INTEGER},
+	    	#{outmsg,                          mode=OUT, jdbcType=VARCHAR}
+            )
+        }
+    </select>
+    
+    <select id="provinces_ondelete" parameterType="map" statementType="CALLABLE">
+    	{ CALL provinces_ondelete(
+	    	#{pid,                        mode=IN,  jdbcType=BIGINT},
+	    	#{outerr,                     mode=OUT, jdbcType=INTEGER},
+	    	#{outmsg,                     mode=OUT, jdbcType=VARCHAR}
+            )
+        }
+    </select>
+    
+    
+     <select id="getListHeaderSO" parameterType="map" resultType="model.HeaderSO">
+	select hs.*, customer_code, customer_description 
+         from header_so hs left join customers cm on hs.customer_id = cm.id
+    </select>
+        
+     <select id="header_so_oninsert" parameterType="map" statementType="CALLABLE">
+    	{ CALL header_so_oninsert(
+                #{pso_number,                     mode=IN,  jdbcType=VARCHAR},
+                #{pso_date,                       mode=IN,  jdbcType=VARCHAR},
+	    	#{pcustomer_id,                   mode=IN,  jdbcType=BIGINT},
+         	#{pstatus,                        mode=IN, jdbcType=INTEGER},
+	    	#{outid,                          mode=OUT, jdbcType=BIGINT},
+	    	#{outerr,                         mode=OUT, jdbcType=INTEGER},
+	    	#{outmsg,                         mode=OUT, jdbcType=VARCHAR}
+            )
+        }
+    </select>
+    
+     <select id="header_so_onupdate" parameterType="map" statementType="CALLABLE">
+    	{ CALL header_so_onupdate(
+                #{pid,                            mode=IN,  jdbcType=BIGINT},
+                #{pso_number,                     mode=IN,  jdbcType=VARCHAR},
+                #{pso_date,                       mode=IN,  jdbcType=VARCHAR},
+	    	#{pcustomer_id,                   mode=IN,  jdbcType=BIGINT},
+         	#{pstatus,                        mode=IN, jdbcType=INTEGER},
+	    	#{outerr,                         mode=OUT, jdbcType=INTEGER},
+	    	#{outmsg,                         mode=OUT, jdbcType=VARCHAR}
+            )
+        }
+    </select>
+    
+    <select id="header_so_ondelete" parameterType="map" statementType="CALLABLE">
+    	{ CALL header_so_ondelete(
+	    	#{pid,                        mode=IN,  jdbcType=BIGINT},
+	    	#{outerr,                     mode=OUT, jdbcType=INTEGER},
+	    	#{outmsg,                     mode=OUT, jdbcType=VARCHAR}
+            )
+        }
+    </select>
+    
+    <select id="getListDetailSO" parameterType="map" resultType="model.DetailSO">
+	Select ds.*, i.code as item_code, i.description as item_description, i.price as item_price
+	From  detail_so ds inner join items i on ds.item_id = i.id where ds.so_id = #{pid};
+    </select>
+          
+     <select id="detail_so_oninsert" parameterType="map" statementType="CALLABLE">
+    	{ CALL detail_so_oninsert(
+         	#{pso_id,                         mode=IN,  jdbcType=BIGINT},
+                #{pline,                          mode=IN,  jdbcType=INTEGER},
+                #{pitem_id,                       mode=IN,  jdbcType=BIGINT},
+	    	#{pquantity,                      mode=IN,  jdbcType=INTEGER},
+                #{pprice,                         mode=IN,  jdbcType=NUMERIC},
+         	#{pdiscount,                      mode=IN,  jdbcType=NUMERIC},         	
+                #{ptax_amount,                    mode=IN,  jdbcType=NUMERIC},
+                #{outid,                          mode=OUT, jdbcType=BIGINT},
+	    	#{outerr,                         mode=OUT, jdbcType=INTEGER},
+	    	#{outmsg,                         mode=OUT, jdbcType=VARCHAR}
+            )
+        }
+    </select>
+    
+       <select id="detail_so_onupdate" parameterType="map" statementType="CALLABLE">
+    	{ CALL detail_so_onupdate(
+         	#{pid,                         mode=IN,  jdbcType=BIGINT},         	
+                #{pso_id,                         mode=IN,  jdbcType=BIGINT},
+                #{pline,                          mode=IN,  jdbcType=INTEGER},
+                #{pitem_id,                       mode=IN,  jdbcType=BIGINT},
+	    	#{pquantity,                      mode=IN,  jdbcType=INTEGER},
+                #{pprice,                         mode=IN,  jdbcType=NUMERIC},
+         	#{pdiscount,                      mode=IN,  jdbcType=NUMERIC},         	
+                #{ptax_amount,                    mode=IN,  jdbcType=NUMERIC},
+	     	#{outerr,                         mode=OUT, jdbcType=INTEGER},
+	    	#{outmsg,                         mode=OUT, jdbcType=VARCHAR}
+            )
+        }
+    </select>
+    
+    <select id="detail_so_ondelete" parameterType="map" statementType="CALLABLE">
+    	{ CALL detail_so_ondelete(
+	    	#{pid,                        mode=IN,  jdbcType=BIGINT},
+	    	#{outerr,                     mode=OUT, jdbcType=INTEGER},
+	    	#{outmsg,                     mode=OUT, jdbcType=VARCHAR}
+            )
+        }
+    </select>
+    
+   
+</mapper>

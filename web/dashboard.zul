@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <style>
+       .dashboard-area{
+           
+           display: flex;
+            margin-top: 20px;
+            justify-content: space-between;
+        }
+        .dashboard-label{
+            font-size: 20px;
+        }
+        
+        .total-items, .total-transactions, .total-countries, .total-customers{
+            padding: 20px;
+            background: linear-gradient(20deg, rgba(174,238,209,1) 0%, rgba(0,113,247,1) 100%);
+            border-radius: 10px;
+            width: calc(100%/5);
+            color: white;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        
+        }
+        
+        .most-popular-item{
+            padding: 20px;
+            background: linear-gradient(20deg, rgba(174,238,209,1) 0%, rgba(0,113,247,1) 100%);
+            border-radius: 10px;
+            width: calc(100%/2.5);
+            color: white;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        
+        }
+    </style>
+    <div style="padding: 20px">
+          <label sclass="dashboard-label">Dashboard</label>
+         <div sclass="dashboard-area" apply="">
+             <div sclass="total-items">
+                 <div>Total Items</div>
+                 <div style="margin-top: 40px">
+                     <label  style="font-size: 30pt; font-weight: bold">1019</label>
+                 </div>
+             </div>          
+          <div sclass="total-transactions">
+              <div>Total Transactions</div>
+                 <div style="margin-top: 40px">
+                     <label  style="font-size: 30pt; font-weight: bold">506</label>
+                 </div>
+          </div>
+            <div sclass="total-transactions">
+             <div>Total Customers</div>
+                 <div style="margin-top: 40px">
+                     <label  style="font-size: 30pt; font-weight: bold">201</label>
+                 </div>
+          </div>
+          <div sclass="total-countries"><div>Total Countries</div>
+                 <div style="margin-top: 40px">
+                     <label  style="font-size: 30pt; font-weight: bold">70</label>
+                 </div></div>
+          </div>
+          <div style="margin-top: 30px">
+                <label sclass="dashboard-label">Most Popular</label>
+          </div>
+           <div sclass="dashboard-area" apply="">
+             <div sclass="most-popular-item">
+                 <div>Item</div>
+                 <div style="margin-top: 10px">
+                     <label  style="font-size: 20pt; font-weight: bold">Iphone 13</label>
+                 </div>
+                 <div style="margin-top: 30px">Number of Sold Units</div>
+                 <div style="margin-top: 10px">
+                     <label  style="font-size: 20pt; font-weight: bold">1121</label>
+                 </div>
+             </div>          
+          <div sclass="total-transactions">
+              <div>Number of Transactions</div>
+                 <div style="margin-top: 80px">
+                     <label  style="font-size: 30pt; font-weight: bold">120</label>
+                 </div></div>
+          <div sclass="total-countries">
+              <div>Number of Countries</div>
+                 <div style="margin-top: 80px">
+                     <label  style="font-size: 30pt; font-weight: bold">11</label>
+                 </div>
+          </div>
+          </div>
+  </div>
+          <div style="padding: 0; margin-top: 50px">
+              <include src="/footer.zul"/>
+          </div>
+</zk>

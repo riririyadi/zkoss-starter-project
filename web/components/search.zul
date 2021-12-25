@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+<window 
+    title="Find Item" 
+    id="searchForm" 
+    width=""
+    height="" 
+    apply="controller.DetailController"
+    closable="true"
+    action="show: slideDown;hide: slideUp"
+>
+	<style>
+.z-textbox-disd, .z-textbox-disd * { color: black !important;}
+</style>
+
+ <vlayout spacing="15px">
+        <hlayout spacing="15px">
+            <groupbox id="gb1" width="300px" onOpen="">
+                <caption>
+                    Partner
+                </caption>
+                <vbox  align="end">
+                    <div>
+                    <hbox align="center"> 
+                        <label value="BP Group" /> 
+                        <textbox value="" />
+                    </hbox>
+                    <hbox> 
+                        <label value="Partner Code" /> 
+                        <textbox value="" />
+                    </hbox>
+                    <hbox> 
+                        <label value="Partner Description" /> 
+                        <textbox value="" />
+                    </hbox>
+                    <hbox>
+                        <label value="Partner Category" /> 
+                        <textbox value="" />
+                    </hbox>
+                    </div>
+                </vbox>
+            </groupbox>
+            
+        </hlayout>
+    </vlayout>
+    <toolbar align="center">
+     
+     <button id="btnNew" image="/img/New24.png" label="New"/>    
+    <button id="btnSave" image="/img/Edit24.png" label="Save"/>       
+    <button id="btnDelete" image="/img/Delete24.png"  label="Delete"/>
+    <button id="btnClose" image="/img/Cancel24.png"  label="Cancel"/>
+
+    </toolbar>
+
+
+</window>
+</zk>

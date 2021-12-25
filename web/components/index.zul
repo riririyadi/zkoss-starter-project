@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    <window id="winListCountry" width="100%" height="100%" border="normal" closable="false" apply="controller.indexController">
+        <tabbox id="tb" height="100%">
+            <tabs id="tabs">
+                <tab id="A" label="Countries" />
+                <tab id="B" label="Provinces" />
+                <tab id="C" label="Cities" />
+                <tab id="D" label="Companies" />
+                <tab id="E" label="Customers" />
+                <tab id="F" label="Items" />
+                <tab id="G" label="Header SO" />
+                <tab id="H" label="Detail SO" />
+                <tab id="I" label="Master Sales Order" />
+            </tabs>
+            <tabpanels>
+                <tabpanel>
+                    <toolbar>
+                        <toolbarbutton id="btnNewCountries"     image="/img/New24.png"     tooltiptext="New"/>
+                        <toolbarbutton id="btnEditCountries"    image="/img/Edit24.png"    tooltiptext="Edit"/>
+                        <toolbarbutton id="btnRefreshCountries" image="/img/Refresh24.png" tooltiptext="Refresh" />
+                        <toolbarbutton id="btnFindCountries"    image="/img/Find24.png"    tooltiptext="Find"  visible="true"/>
+                        <textbox id="searchCountries"/>  
+                    </toolbar>
+                    <listbox id="listboxCountries" vflex="1" mold="paging" autopaging="true" style="background: white" >
+                        <!--<frozen columns="4"/>-->
+                        <listhead sizable="true">
+                            <listheader style="text-align: center" label=""   align="center"    width="70px"/>
+                            <listheader style="text-align: center" sort="auto(country_code)"          label="Countries Code"           align="left"    hflex="min"/>
+                            <listheader style="text-align: center" sort="auto(country_description)"   label="Countries Description"    align="left"    hflex="min"/>
+                        </listhead>
+                    </listbox>
+                </tabpanel>
+                <tabpanel>
+                    <toolbar>
+                        <toolbarbutton id="btnNewProvinces"     image="/img/New24.png"     tooltiptext="New"/>
+                        <toolbarbutton id="btnEditProvinces"    image="/img/Edit24.png"    tooltiptext="Edit"/>
+                        <toolbarbutton id="btnRefreshProvinces" image="/img/Refresh24.png" tooltiptext="Refresh" />
+                        <toolbarbutton id="btnFindProvinces"    image="/img/Find24.png"    tooltiptext="Find"  visible="true"/>
+                        <textbox id="searchProvinces"/>    
+                    </toolbar>
+                    <listbox id="listboxProvinces" vflex="1" mold="paging" autopaging="true" style="background: white" >
+                        <!--<frozen columns="4"/>-->
+                        <listhead sizable="true">
+                            <listheader style="text-align: center" label=""   align="center"    width="70px"/>
+                            <listheader style="text-align: center" sort="auto(provinces_code)"          label="Provinces Code"           align="left"    hflex="min"/>
+                            <listheader style="text-align: center" sort="auto(province_description)"    label="Provinces Description"    align="left"    hflex="min"/>
+                        </listhead>
+                    </listbox>
+                </tabpanel>
+                <tabpanel>
+                    <toolbar>
+                        <toolbarbutton id="btnNewCities"     image="/img/New24.png"     tooltiptext="New"/>
+                        <toolbarbutton id="btnEditCities"    image="/img/Edit24.png"    tooltiptext="Edit"/>
+                        <toolbarbutton id="btnRefreshCities" image="/img/Refresh24.png" tooltiptext="Refresh" />
+                        <toolbarbutton id="btnFindCities"    image="/img/Find24.png"    tooltiptext="Find"  visible="true"/>  
+                        <textbox id="searchCities"/>  
+                    </toolbar>
+                    <listbox id="listboxCities" vflex="1" mold="paging" autopaging="true" style="background: white" >
+                        <!--<frozen columns="4"/>-->
+                        <listhead sizable="true">
+                            <listheader style="text-align: center" label=""   align="center"    width="70px"/>
+                            <listheader style="text-align: center" sort="auto(city_code)"          label="City Code"           align="left"    hflex="min"/>
+                            <listheader style="text-align: center" sort="auto(city_description)"   label="City Description"    align="left"    hflex="min"/>
+                        </listhead>
+                    </listbox>
+                </tabpanel>
+                <tabpanel>
+                    <toolbar>
+                        <toolbarbutton id="btnNewCompanies"     image="/img/New24.png"     tooltiptext="New"/>
+                        <toolbarbutton id="btnEditCompanies"    image="/img/Edit24.png"    tooltiptext="Edit"/>
+                        <toolbarbutton id="btnRefreshCompanies" image="/img/Refresh24.png" tooltiptext="Refresh" />
+                        <toolbarbutton id="btnFindCompanies"    image="/img/Find24.png"    tooltiptext="Find"  visible="true"/>  
+                        <textbox id="searchCompanies"/>  
+                    </toolbar>
+                    <listbox id="listboxCompanies" vflex="1" mold="paging" autopaging="true" style="background: white" >
+                        <!--<frozen columns="4"/>-->
+                        <listhead sizable="true">
+                            <listheader style="text-align: center" label=""   align="center"    width="70px"/>
+                            <listheader style="text-align: center" sort="auto(company_code)"          label="Company Code"           align="left"    hflex="min"/>
+                            <listheader style="text-align: center" sort="auto(company_description)"   label="Company Description"    align="left"    hflex="min"/>
+                            <listheader style="text-align: center" sort="auto(company_address)"       label="Company Address"        align="left"    hflex="min"/>
+                            <listheader style="text-align: center" sort="auto(zip_code)"              label="Zip Code"               align="left"    hflex="min"/>
+                            <listheader style="text-align: center" sort="auto(email)"                 label="Email"                  align="left"    hflex="min"/>
+                            <listheader style="text-align: center" sort="auto(phone_number)"          label="Phone Number"           align="left"    hflex="min"/>
+                        </listhead>
+                    </listbox>
+                </tabpanel>
+                <tabpanel>
+                    <toolbar>
+                        <toolbarbutton id="btnNewCustomers"     image="/img/New24.png"     tooltiptext="New"/>
+                        <toolbarbutton id="btnEditCustomers"    image="/img/Edit24.png"    tooltiptext="Edit"/>
+                        <toolbarbutton id="btnRefreshCustomers" image="/img/Refresh24.png" tooltiptext="Refresh" />
+                        <toolbarbutton id="btnFindCustomers"    image="/img/Find24.png"    tooltiptext="Find"  visible="true"/>
+                        <textbox id="searchCustomers"/>    
+                    </toolbar>
+                    <listbox id="listboxCustomers" vflex="1" mold="paging" autopaging="true" style="background: white" >
+                        <!--<frozen columns="4"/>-->
+                        <listhead sizable="true">
+                            <listheader style="text-align: center" label=""   align="center"    width="70px"/>
+                            <listheader style="text-align: center" sort="auto(country_code)"          label="Customer Code"          align="left"    hflex="min"/>
+                            <listheader style="text-align: center" sort="auto(country_description)"   label="Customer Description"   align="left"    hflex="min"/>
+                            <listheader style="text-align: center" sort="auto(country_code)"          label="Customer Address"       align="left"    hflex="min"/>
+                            <listheader style="text-align: center" sort="auto(zip_code)"              label="Zip Code"               align="left"    hflex="min"/>
+                            <listheader style="text-align: center" sort="auto(contact_person)"        label="Contact Person"         align="left"    hflex="min"/>
+                            <listheader style="text-align: center" sort="auto(phone_number)"          label="Phone Number"           align="left"    hflex="min"/>
+                            <listheader style="text-align: center" sort="auto(email)"                 label="Email"                  align="left"    hflex="min"/>
+                            
+                        </listhead>
+                    </listbox>
+                </tabpanel>
+                <tabpanel>
+                    <toolbar>
+                        <toolbarbutton id="btnNew"     image="/img/New24.png"     tooltiptext="New"/>
+                        <toolbarbutton id="btnEdit"    image="/img/Edit24.png"    tooltiptext="Edit"/>
+                        <toolbarbutton id="btnRefresh" image="/img/Refresh24.png" tooltiptext="Refresh" />
+                        <toolbarbutton id="btnFind"    image="/img/Find24.png"    tooltiptext="Find"  visible="true"/>  
+                        <textbox id="searchItems"/>  
+                    </toolbar>
+                    <listbox id="listbox" vflex="1" mold="paging" autopaging="true" style="background: white" >
+                        <!--<frozen columns="4"/>-->
+                        <listhead sizable="true">
+                            <listheader style="text-align: center" label=""   align="center"    width="70px"/>
+                            <listheader style="text-align: center" sort="auto(items_code)"          label="Code"           align="left"    hflex="min"/>
+                            <listheader style="text-align: center" sort="auto(items_description)"   label="Description"    align="left"    hflex="min"/>
+                            <listheader style="text-align: center" sort="auto(items_uom)"           label="UOM"            align="left"    hflex="min"/>
+                            <listheader style="text-align: center" sort="auto(items_price)"         label="Price"          align="left"    hflex="min"/>
+                        </listhead>
+                    </listbox>
+                </tabpanel>
+                <tabpanel>
+                    <toolbar>
+                        <toolbarbutton id="btnNewHeaderSo"     image="/img/New24.png"     tooltiptext="New"/>
+                        <toolbarbutton id="btnEditHeaderSo"    image="/img/Edit24.png"    tooltiptext="Edit"/>
+                        <toolbarbutton id="btnRefreshHeaderSo" image="/img/Refresh24.png" tooltiptext="Refresh" />
+                        <toolbarbutton id="btnFindHeaderSo"    image="/img/Find24.png"    tooltiptext="Find"  visible="true"/>  
+                        <textbox id="searchHeader"/>  
+                    </toolbar>
+                    <listbox id="listboxHeaderSo" vflex="1" mold="paging" autopaging="true" style="background: white" >
+                        <!--<frozen columns="4"/>-->
+                        <listhead sizable="true">
+                            <listheader style="text-align: center"                                 label=""            align="center"  width="70px"/>
+                            <listheader style="text-align: center" sort="auto(so_number)"          label="SO Number"       align="left"    hflex="min"/>
+                            <listheader style="text-align: center" sort="auto(so_date)"            label="SO Date"         align="left"    hflex="min"/>
+                            <listheader style="text-align: center" sort="auto(customer)"           label="Customer"        align="left"    hflex="min"/>
+                            <listheader style="text-align: center" sort="auto(status)"             label="Status"          align="left"    hflex="min"/>
+                        </listhead>
+                    </listbox>
+                </tabpanel>
+                <tabpanel>
+                    <toolbar>
+                        <toolbarbutton id="btnNewDetailSo"     image="/img/New24.png"     tooltiptext="New"/>
+                        <toolbarbutton id="btnEditDetailSo"    image="/img/Edit24.png"    tooltiptext="Edit"/>
+                        <toolbarbutton id="btnRefreshDetailSo" image="/img/Refresh24.png" tooltiptext="Refresh" />
+                        <toolbarbutton id="btnFindDetailSo"    image="/img/Find24.png"    tooltiptext="Find"  visible="true"/> 
+                        <textbox id="searchDetail"/>   
+                    </toolbar>
+                    <listbox id="listboxDetailSo" vflex="1" mold="paging" autopaging="true" style="background: white" >
+                        <!--<frozen columns="4"/>-->
+                        <listhead sizable="true">
+                            <listheader style="text-align: center"                                 label=""             align="center"  width="70px"/>
+                            <listheader style="text-align: center" sort="auto(line)"               label="Line"             align="left"    hflex="min"/>
+                            <listheader style="text-align: center" sort="auto(quantity)"           label="Quantity"         align="left"    hflex="min"/>
+                            <listheader style="text-align: center" sort="auto(price)"              label="Price"            align="left"    hflex="min"/>
+                            <listheader style="text-align: center" sort="auto(discount)"           label="Discount"         align="left"    hflex="min"/>
+                            <listheader style="text-align: center" sort="auto(tax)"                label="Tax"              align="left"    hflex="min"/>
+                        </listhead>
+                    </listbox>
+                </tabpanel>
+                <tabpanel>
+                    <toolbar>
+                        <toolbarbutton id="btnNewMaster"     image="/img/New24.png"     tooltiptext="New"/>
+                        <toolbarbutton id="btnEditMaster"    image="/img/Edit24.png"    tooltiptext="Edit"/>
+                        <toolbarbutton id="btnRefreshMaster" image="/img/Refresh24.png" tooltiptext="Refresh" />
+                        <toolbarbutton id="btnFindMaster"    image="/img/Find24.png"    tooltiptext="Find"  visible="true"/>  
+                    </toolbar>
+                    <listbox id="listboxMaster" vflex="1" mold="paging" autopaging="true" style="background: white" >
+                        <!--<frozen columns="4"/>-->
+                        <listhead sizable="true">
+                            <listheader style="text-align: center"                                 label=""                align="center"  width="30px"/>
+                            <listheader style="text-align: center" sort="auto(so_number)"          label="SO Number"       align="left"    width="70px" hflex="min"/>
+                            <listheader style="text-align: center" sort="auto(so_date)"            label="SO Date"         align="left"    width="70px" hflex="min"/>
+                            <listheader style="text-align: center" sort="auto(customer)"           label="Customer"        align="left"    width="70px" hflex="min"/>
+                            <listheader style="text-align: center" sort="auto(status)"             label="Status"          align="left"    width="70px" hflex="min"/>
+                        </listhead>
+                    </listbox>
+                </tabpanel>
+            </tabpanels>
+        </tabbox>
+    </window>
+</zk>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+
+<window title="Master Sales Order" 
+        id="master_so" 
+        width="80%"  
+        height="" 
+        apply="controller.MasterSOController"
+        closable="true"
+        action="show: slideDown;hide: slideUp">
+<style>
+.z-textbox-disd, .z-textbox-disd * { color: black !important;}
+</style>
+ 
+    <hlayout style="padding: 20px">
+            <vbox align="end">
+                <hbox style="margin-right: 111px">
+                        <label id="" value="Order Number" style="float: right"/>    
+                        <textbox value="" id="so_number" disabled="true"/> 
+                </hbox>
+                <hbox  style="margin-right: 111px">
+                        <label id="" value="Sales Order Date" style="float: right"/>
+                        <datebox id="so_date" format="dd-MM-yyyy HH:mm:ss" width="152px"/>
+                </hbox>
+                <hbox>
+                        <label id="" value="Customer" style="float: right"/>                   
+                        <textbox value="" id="customer_id" visible="false"/>                            
+                        <textbox value="" id="customer_code" width="50px" disabled="true"/>    
+                        <textbox value="" id="customer_description" disabled="true"/>  
+                        <button id="btnLovCustomer" label="..." image="img/search.png"/> 
+                </hbox>
+                <hbox  style="margin-right: 111px">
+                        <label id="" value="Status" style="float: right"/>
+                       <textbox id="status" value="" disabled="true"/>
+                </hbox>
+                
+            </vbox>
+                
+        </hlayout>
+         <listbox id="listboxDetailSO" vflex="1" mold="paging" autopaging="true" style="background: white" height="200px">
+            <!--<frozen columns="4"/>-->
+                <listhead sizable="true">
+                    <listheader style="text-align: center" label=""   align="center"    width="70px"><button id="tambahDetail" label="(+)"/></listheader>
+                     <listheader style="text-align: center" label="Edit"   align="center"    width="70px"></listheader>                  
+                    <listheader style="text-align: left" sort="auto(line)"   label="Line" align="left"    hflex="min"/>                     
+                    <listheader style="text-align: left" sort="auto(item_id)"   label="Item" align="left"    hflex="min"/>                     
+                    <listheader style="text-align: left" sort="auto(quantity)"   label="Quantity" align="left"    hflex="min"/> 
+                    <listheader style="text-align: left" sort="auto(price)"   label="Price" align="left"    hflex="min"/> 
+                    <listheader style="text-align: left" sort="auto(discount)"   label="Discount (%)" align="left"    hflex="min"/>  
+                    <listheader style="text-align: left" sort="auto(tax_amount)"   label="Tax" align="left"   width="100%" hflex="max"/>                      
+                </listhead>
+            </listbox>
+         <hlayout width="100%">
+             <vbox align="end">
+            <hbox  style="margin-left: 340px; margin-top: 20px; margin-bottom: 20px">
+                 
+                        <button image="/img/New24.png" label="New" id="btnNew" height="30px" onClick=""/>
+                        <button image="/img/Save24.png" label="Save" id="btnSave" height="30px" onClick=""/>
+                        <button image="/img/1449847706_OK.png" label="Approve" id="btnApprove" height="30px" onClick=""/>
+                        <button image="/img/Cancel24.png" label="Close Transaction" id="btnClose" height="30px" onClick=""/>
+                       
+             </hbox>
+             </vbox>
+         </hlayout>
+    </window>
+</zk>

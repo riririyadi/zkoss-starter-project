@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/style.css"?>
+
+<?init class="controller.AuthenticationInit"?>
+<zk>
+ <style>
+     body{
+        padding: 0;
+        margin: 0;
+     }
+    
+     .sidebar-collapsed{
+        width: 100px;
+     }
+ </style>
+    <custom-attributes org.zkoss.zul.image.preload="true"/>
+    <borderlayout hflex="1" vflex="1" id="root">
+        <north vflex="min" border="none" sclass="header-wrapper" >
+            <include src="/banner.zul"/>
+        </north>
+        <west id="sidebarArea" border="right" width="200px">
+            <include id="sidebarContent" src="/sidebar.zul"/>
+        </west>
+        <center id="mainContent"  border="none" style="background: #EFF4F9"  autoscroll="true">
+                <include id="mainArea" src="/mainContent.zul"/>
+        </center>
+<!--        <south border="none">
+            <include src="/footer.zul"/>
+        </south>-->
+    </borderlayout>
+  
+</zk>

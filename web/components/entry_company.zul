@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+
+<window 
+        id="entry_company" 
+        width=""  
+        height="" 
+        apply="controller.CompanyController"
+        closable="true"
+        action="show: slideDown;hide: slideUp"
+>
+    <style>
+.z-textbox-disd, .z-textbox-disd * { color: black !important;}
+</style>
+
+ 
+            <hlayout style="padding: 20px">
+
+                <vbox align="end">
+                
+                <hbox style="margin-right: 111px">
+                        <label id="" value="Company Code" style="float: right"/>    
+                        <textbox value="" id="company_code" maxlength="5" constraint="no empty"/> 
+                </hbox>
+                <hbox style="margin-right: 111px">
+                        <label id="" value="Company Description" style="float: right"/>
+                        <textbox value="" id="company_description" constraint="no empty"/>
+                </hbox>
+                <hbox style="margin-right: 111px">
+                        <label id="" value="Company Address" style="float: right"/>
+                        <textbox value="" id="company_address" constraint="no empty"/> 
+                </hbox>
+
+                 
+                 <hbox>
+                        <label id="" value="Country" style="float: right"/>                   
+                        <textbox value="" id="country_id" visible="false"/>                            
+                        <textbox value="" id="country_code" width="50px" disabled="true"/>    
+                        <textbox value="" id="country_description" disabled="true"/>  
+                        <button id="btnLovCountry" label="..." image="img/search.png"/> 
+                </hbox>
+           
+                <hbox>
+                        <label id="" value="Province" style="float: right"/>                   
+                        <textbox value="" id="province_id" visible="false"/>                            
+                        <textbox value="" id="province_code" width="50px" disabled="true"/>    
+                        <textbox value="" id="province_description" disabled="true"/>  
+                        <button id="btnLovProvince" label="..." image="img/search.png"/> 
+                </hbox>
+                 <hbox>
+                        <label id="" value="City" style="float: right"/>                   
+                        <textbox value="" id="city_id" visible="false"/>                            
+                        <textbox value="" id="city_code" width="50px" disabled="true"/>    
+                        <textbox value="" id="city_description" disabled="true"/>  
+                        <button id="btnLovCity" label="..." image="img/search.png"/> 
+                </hbox>
+                   
+                <hbox style="margin-right: 111px">
+                        <label id="" value="Phone number" style="float: right"/>
+                        <textbox value="" id="phone_number" constraint="no empty" xmlns:w="client">
+		<attribute w:name="doKeyDown_"><![CDATA[
+			function (evt) {
+				var keyCode = event.keyCode;
+				if( keyCode == 8 // back space
+					|| keyCode == 13 // enter
+					|| keyCode == 16 // enter
+					|| (keyCode >= 35 && keyCode <= 40) // home, end, arrows
+					|| keyCode == 46) { // Delete
+					this.$doKeyDown_(evt);
+				} else if ( !evt.shiftKey &&  // only do without shift key
+					(keyCode >= 48 && keyCode <= 57)
+					|| (keyCode >= 96 && keyCode <= 105)) {// number range
+					this.$doKeyDown_(evt);
+				} else {
+					evt.stop();
+					return;
+				}
+			}
+		]]></attribute>
+	</textbox>
+                </hbox>
+                <hbox style="margin-right: 111px">
+                        <label id="" value="Email" style="float: right"/>
+                        <textbox value="" id="email" constraint="/.+@.+\.[a-z]+/: Please enter an e-mail address"/> 
+                </hbox>
+                 <hbox style="margin-right: 111px">
+                        <label id="" value="Zip Code" style="float: right"/>
+                        <textbox value="" id="zip_code" maxlength="5" constraint="no empty" xmlns:w="client">
+		<attribute w:name="doKeyDown_"><![CDATA[
+			function (evt) {
+				var keyCode = event.keyCode;
+				if( keyCode == 8 // back space
+					|| keyCode == 13 // enter
+					|| keyCode == 16 // enter
+					|| (keyCode >= 35 && keyCode <= 40) // home, end, arrows
+					|| keyCode == 46) { // Delete
+					this.$doKeyDown_(evt);
+				} else if ( !evt.shiftKey &&  // only do without shift key
+					(keyCode >= 48 && keyCode <= 57)
+					|| (keyCode >= 96 && keyCode <= 105)) {// number range
+					this.$doKeyDown_(evt);
+				} else {
+					evt.stop();
+					return;
+				}
+			}
+		]]></attribute>
+	</textbox>
+                </hbox>
+                <hbox style="margin-right: 30%; margin-top: 20px">
+                   <button image="/img/Save24.png" label="Save" id="btnSave" onClick=""/>
+                    <button image="/img/Cancel24.png" label="Cancel" id="btnClose" onClick=""/> 
+                </hbox>
+             
+                </vbox>
+            </hlayout>
+</window>
+</zk>

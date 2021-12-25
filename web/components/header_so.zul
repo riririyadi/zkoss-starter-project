@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+ 
+<window title="Sales Order" 
+        id="winSalesOrder" 
+        width=""  
+        height="" 
+        apply="controller.HeaderSOController"
+        closable="true"
+        action="show: slideDown;hide: slideUp"
+>
+
+        <hlayout style="padding: 20px">
+            <vbox align="end">
+                <hbox style="margin-right: 111px">
+                        <label id="" value="Sales Order Number" style="float: right"/>    
+                        <textbox value="" id="so_number"/> 
+                </hbox>
+                <hbox  style="margin-right: 111px">
+                        <label id="" value="Sales Order Date" style="float: right"/>
+                        <datebox id="so_date" format="dd-MM-yyyy HH:mm:ss" width="152px"/>
+                </hbox>
+                <hbox>
+                        <label id="" value="Customer" style="float: right"/>                   
+                        <textbox value="" id="customer_id" visible="false"/>                            
+                        <textbox value="" id="customer_code" width="50px" disabled="true"/>    
+                        <textbox value="" id="customer_description" disabled="true"/>  
+                        <button id="btnLovCustomer" label="..." image="img/search.png"/> 
+                </hbox>
+                <hbox  style="margin-right: 111px">
+                        <label id="" value="Status" style="float: right"/>
+                       <combobox id="status" width="152px">
+		     		<comboitem label="0"/>
+                                <comboitem label="1"/>
+                                <comboitem label="2"/>
+	                </combobox>  
+                </hbox>
+                <hbox  style="margin-right: 30%; margin-top: 20px">
+                     <button image="/img/Save24.png" label="Save" id="btnSave" onClick=""/>
+                    <button image="/img/Cancel24.png" label="Cancel" id="btnClose" onClick=""/> 
+                </hbox>
+            </vbox>
+                
+        </hlayout>
+        
+</window>
+</zk>

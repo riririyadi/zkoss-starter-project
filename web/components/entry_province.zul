@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+ 
+<window 
+        id="entry_province" 
+        width=""  
+        height="" 
+        apply="controller.ProvinceController"
+        closable="true"
+        action="show: slideDown;hide: slideUp"
+>
+    <style>
+.z-textbox-disd, .z-textbox-disd * { color: black !important;}
+</style>
+
+    <hlayout style="padding: 20px">
+            <vbox align="end">
+                 <hbox>
+                        <label id="" value="Country" style="float: right"/>                   
+                        <textbox value="" id="country_id" visible="false"/>                            
+                        <textbox value="" id="country_code" width="50px" disabled="true" constraint="no empty"/>    
+                        <textbox value="" id="country_description" disabled="true" constraint="no empty"/>  
+                        <button id="btnLovCountry" label="..." image="img/search.png"/> 
+                </hbox>
+                <hbox style="margin-right: 111px">
+                        <label id="" value="Province Code" style="float: right"/>    
+                        <textbox value="" id="province_code" maxlength="5" constraint="no empty"/>
+                </hbox>
+                <hbox style="margin-right: 111px">
+                        <label id="" value="Province Description" style="float: right"/>
+                        <textbox value="" id="province_description" constraint="no empty"/>
+                </hbox>           
+                <hbox style="margin-right: 30%; margin-top: 20px">
+                     <button image="/img/Save24.png" label="Save" id="btnSave" onClick=""/>
+                    <button image="/img/Cancel24.png" label="Cancel" id="btnClose" onClick=""/> 
+                </hbox>
+               
+            </vbox>
+         </hlayout>
+</window>
+</zk>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+ 
+<window 
+        id="entry_item" 
+        width=""  
+        height="" 
+        apply="controller.ItemController"
+        closable="true"
+        action="show: slideDown;hide: slideUp"
+>
+    <hlayout style="padding: 20px">
+          
+            <vbox align="end">
+                <hbox>
+                        <label id="" value="Item Code" style="float: right"/>    
+                        <textbox value="" id="code" maxlength="5" constraint="no empty"/>
+                </hbox>
+                <hbox>
+                        <label id="" value="Item Description" style="float: right"/>
+                        <textbox value="" id="description"  constraint="no empty"/>
+                </hbox>
+                <hbox>
+                        <label id="" value="Unit Of Measurements" style="float: right"/>
+                        <textbox value="" id="uom"  constraint="no empty"/>
+                </hbox>
+                <hbox>
+                        <label id="" value="Price" style="float: right"/>
+                        <textbox  maxlength="25" constraint="no empty" id="price" xmlns:w="client">
+                            <attribute w:name="doKeyDown_"><![CDATA[
+			function (evt) {
+				var keyCode = event.keyCode;
+				if( keyCode == 8 // back space
+					|| keyCode == 13 // enter
+					|| keyCode == 16 // enter
+					|| (keyCode >= 35 && keyCode <= 40) // home, end, arrows
+					|| keyCode == 46) { // Delete
+					this.$doKeyDown_(evt);
+				} else if ( !evt.shiftKey &&  // only do without shift key
+					(keyCode >= 48 && keyCode <= 57)
+					|| (keyCode >= 96 && keyCode <= 105)) {// number range
+					this.$doKeyDown_(evt);
+				} else {
+					evt.stop();
+					return;
+				}
+			}
+		]]></attribute>
+                        </textbox>
+                </hbox>
+                <div style="margin-right: 20%; margin-top: 20px">
+                <hbox pack="center" align="center">
+                    <button image="/img/Save24.png" label="Save" id="btnSave" onClick=""/>
+                    <button image="/img/Cancel24.png" label="Cancel" id="btnClose" onClick=""/> 
+                </hbox>
+                </div>            
+            </vbox>
+         </hlayout>
+</window>
+</zk>
