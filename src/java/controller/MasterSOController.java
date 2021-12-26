@@ -140,7 +140,7 @@ public class MasterSOController extends SelectorComposer<Component> {
        
         HashMap<String, Object> map = new HashMap<String, Object>();
         
-        if(!customer_id.getValue().isEmpty()){
+        if(!args.containsKey("pid")){
                 
                 Date date = new Date();
                 LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -174,13 +174,7 @@ public class MasterSOController extends SelectorComposer<Component> {
                 mapReturnedValue.put("pstatus", map.get("pstatus"));
                 args = mapReturnedValue;
                 }
-        
-          
-          
-           
-               
-      
-            
+                   
     }
      @Listen(Events.ON_CLICK + "= #tambahDetail")
     public void doNewItem() {

@@ -17,6 +17,8 @@ import model.Customer;
 import model.DetailSO;
 import model.HeaderSO;
 import model.Province;
+import model.User;
+import model.Users;
 
 public class DemoImplement
 {
@@ -705,4 +707,22 @@ public class DemoImplement
         }
         return map;
     }
+    
+
+           public List<User> login(Map map) 
+    {
+        List<User> user;
+        SqlSession session = sqlSessionFactory.openSession();
+        try 
+        {
+            user = session.selectList("mapper.login", map);
+        } 
+        finally 
+        {
+            session.close();
+        }
+        return user;
+    }
+    
+    
 }

@@ -16,32 +16,32 @@ import java.util.Set;
 public class UserCredential implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	String account;
+	String email;
 	String name;
 	
 	Set<String> roles = new HashSet<String>();
 
-	public UserCredential(String account, String name) {
-		this.account = account;
+	public UserCredential(String email, String name) {
+		this.email = email;
 		this.name = name;
 	}
 
 	public UserCredential() {
-		this.account = "anonymous";
+		this.email = "anonymous";
 		this.name = "Anonymous";
 		roles.add("anonymous");
 	}
 
 	public boolean isAnonymous() {
-		return hasRole("anonymous") || "anonymous".equals(account);
+		return hasRole("anonymous") || "anonymous".equals(email);
 	}
 
 	public String getAccount() {
-		return account;
+		return email;
 	}
 
 	public void setAccount(String account) {
-		this.account = account;
+		this.email = account;
 	}
 
 	public String getName() {

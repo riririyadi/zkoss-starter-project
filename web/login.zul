@@ -9,12 +9,21 @@
             min-height: 100vh;
            
         }
+        
+        .login-error{
+            color: red;
+            padding: 5px;
+            background-color: pink;
+            border-radius: 5px;
+
+        }
         .login-form{
             background-image: linear-gradient(to bottom right, #0000ff, #529da8);
             height: 300px;
             width: 250px;
             padding: 20px;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+       
 
         }
         .btn-login{
@@ -51,8 +60,16 @@
             background-position-x: 40%;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         }
+        .visibility{
+            position: absolute;
+            right: 7px;
+            bottom: 7px;
+            border:none;
+            background: none;
+            cursor: pointer;
+        }
     </style>
-    <div sclass="login" apply="controller.LoginController" id="loginWin">
+    <div sclass="login" apply="controller.LoginController">
         <div sclass="login-form">
           <div style="width: 100%; justify-content: center; align-items: center; display: flex">
             <image id="img" width="150px" height="30px" src="https://logodownload.org/wp-content/uploads/2021/10/meta-logo.png"/>
@@ -61,14 +78,21 @@
             <label style="color:white; font-size: 20px; font-weight: bold"> WELCOME</label>
         </div>
        <vbox width="100%">
-           <label id="message" value=" "/>
-           <label style="color: white">Email</label>           
+           <div style="text-align:center; width: 100%">
+               <label id="message" value=""/>
+            </div>
+           <label style="color: white">Email</label>     
+                 
            <textbox id="email" height="20px" constraint="/.+@.+\.[a-z]+/: Please enter your e-mail address" style="width: 98%; padding: 5px 0px 5px 5px"/>
            <label style="color: white">Password</label>
+           <div style="position: relative">
            <textbox id="password"  type="password" height="20px"  style="width: 98%; padding: 5px 0px 5px 5px" constraint="no empty: Please enter your password"/>
+          
+           <button image="/img/invisible-16.png" id="visibility" sclass="visibility"/>
+           </div>
            <button label="Login" sclass="btn-login" id="login"/>
         </vbox>
-        </div>
+            </div>
         <div sclass="description">
 
         </div>

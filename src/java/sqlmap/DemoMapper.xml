@@ -439,5 +439,11 @@
         }
     </select>
     
+    
+     <select id="login" parameterType="map" resultType="model.User">
+	Select *
+	From   users where email = #{pemail};
+    </select>
+    
    
 </mapper>

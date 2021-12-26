@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?init class="controller.AuthenticationInit"?>
 <zk xmlns="http://www.zkoss.org/2005/zul">
     <style>
         .session_on{
@@ -11,8 +12,17 @@
         align-items: center;
         min-height: 100vh;
         }
+        .btn-back{
+            padding: 5px 10px;
+        border-radius: 10px;
+        border: none;
+        }
     </style>
     <div sclass="session_on">
-    <label style="font-size: 30pt; font-weight: bold">You are in the middle of session.</label>
+        <label style="font-size: 30pt; font-weight: bold">You are in the middle of session.</label>
+        <separator />
+        <div>
+        <button sclass="btn-back" href="/home.zul">Back to Home</button>
+        </div>
     </div>
 </zk>

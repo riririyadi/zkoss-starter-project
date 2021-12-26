@@ -5,7 +5,7 @@
  */
 package service;
 
-import entity.User;
+import model.User;
 
 /**
  *
@@ -14,7 +14,7 @@ import entity.User;
 public interface UserInfoService {
 
 	/** find user by account **/
-	public User findUser(String account);
+	public User findUser(String email);
 	
 	/** update user **/
 	public User updateUser(User user);

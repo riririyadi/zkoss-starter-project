@@ -5,7 +5,7 @@
  */
 package implement;
 
-import entity.User;
+import model.User;
 import model.UserCredential;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
@@ -29,7 +29,7 @@ public class AuthenticationServiceNextImpl extends AuthenticationServiceImpl {
 		}
 		
 		Session sess = Sessions.getCurrent();
-		UserCredential cre = new UserCredential(user.getAccount(),user.getFullName());
+		UserCredential cre = new UserCredential(user.getEmail(),user.getName());
 		//just in case for this demo.
 		if(cre.isAnonymous()){
 			return false;

@@ -14,6 +14,8 @@ import model.Company;
 import model.DetailSO;
 import model.HeaderSO;
 import model.Item;
+import model.User;
+import model.Users;
 
 /**
  *
@@ -27,13 +29,9 @@ public class Test {
         
         //insert list
      HashMap<String, Object> map = new HashMap<String, Object>();
-                            map.put("pid", new Long(27) );
-                            map.put("pso_number", new String("PI - 218") );
-                            map.put("pso_date", new String("26-12-2021 00:00:00"));            
-                            map.put("pcustomer_id", new Long(11));            
-                            map.put("pstatus", new Integer(1));   
-                            
-                            imp.header_so_onupdate(map);
+                            map.put("pemail", "riririyadii@gmail.com" );
+                            map.put("ppassword", "testing1234" );
+                         
 ////        map.put("pid", 3);
 //        map.put("pcustomer_code", "SPH");
 //        map.put("pcustomer_description", "SPHORA");
@@ -63,16 +61,16 @@ public class Test {
 //	pemail character varying,
 //	pcompany_id bigint,
         
-//        Map result = imp.customers_oninsert(map);
+       List<User> list = imp.login(map);
 //        
-        System.out.println("ini map result " + map);
+      
 
             
-//        panggil list
-//        for(int i = 0; i < list.size(); i++){
-//            System.out.println("code = " + list.get(i).getCode()+ " Desc = " + list.get(i).getDescription());
-//        }
-//        
+ 
+        for(int i = 0; i < list.size(); i++){
+            System.out.println("id = " + list.get(i).getId()+ " name = " + list.get(i).getName());
+        }
+        
         
     }
 }

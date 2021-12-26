@@ -5,9 +5,10 @@
  */
 package implement;
 
-import entity.User;
+import model.User;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import service.UserInfoService;
 /**
@@ -17,19 +18,23 @@ import service.UserInfoService;
 public class UserInfoServiceImpl  implements UserInfoService, Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	static protected List<User> userList = new ArrayList<User>();  
-	static{
-		userList.add(new User("anonymous","1234","Anonymous","anonumous@your.com"));
-		userList.add(new User("admin@your.com","1234","Admin","admin@your.com"));
-		userList.add(new User("info@zkoss.org","1234","ZKOSS","info@zkoss.org"));
-	}
+        DemoImplement imp = new DemoImplement();
+	static protected List<User> userList;
+//	static{
+////		userList.add(new User(new Long(1),"1234","Anonymous","anonumous@your.com"));
+////		userList.add(new User(new Long(2),"1234","Admin","admin@your.com"));
+//		userList.add(new User(new Long(3),"testing1234","Riri Riyadi","riririyadii@gmail.com"));
+//	}
 	
 	/** synchronized is just because we use static userList in this demo to prevent concurrent access **/
-	public synchronized User findUser(String account){
+	public synchronized User findUser(String email){
+            HashMap<String, Object> map = new HashMap<String, Object>();
+            map.put("pemail", email);
+            userList = imp.login(map);  
 		int s = userList.size();
 		for(int i=0;i<s;i++){
 			User u = userList.get(i);
-			if(account.equals(u.getAccount())){
+			if(email.equals(u.getEmail())){
 				return User.clone(u);
 			}
 		}
@@ -41,11 +46,11 @@ public class UserInfoServiceImpl  implements UserInfoService, Serializable{
 		int s = userList.size();
 		for(int i=0;i<s;i++){
 			User u = userList.get(i);
-			if(user.getAccount().equals(u.getAccount())){
+			if(user.getEmail().equals(u.getEmail())){
 				userList.set(i,u = User.clone(user));
 				return u;
 			}
 		}
-		throw new RuntimeException("user not found "+user.getAccount());
+		throw new RuntimeException("user not found "+user.getEmail());
 	}
 }
