@@ -24,7 +24,6 @@
         <center id="mainContent"  border="none" style="background: #EFF4F9"  autoscroll="true">
                 <include id="mainArea" src="/mainContent.zul"/>
         </center>
-
     </borderlayout>
   
 </zk>

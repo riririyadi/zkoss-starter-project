@@ -32,30 +32,30 @@
         
         }
     </style>
-    <div style="padding: 20px">
+    <div id="dashboard" style="padding: 20px" apply="controller.DashboardController">
           <label sclass="dashboard-label">Dashboard</label>
          <div sclass="dashboard-area" apply="">
              <div sclass="total-items">
                  <div>Total Items</div>
                  <div style="margin-top: 40px">
-                     <label  style="font-size: 30pt; font-weight: bold">1019</label>
+                     <label id="total_items" value="" style="font-size: 30pt; font-weight: bold"/>
                  </div>
              </div>          
           <div sclass="total-transactions">
               <div>Total Transactions</div>
                  <div style="margin-top: 40px">
-                     <label  style="font-size: 30pt; font-weight: bold">506</label>
+                     <label id="total_transactions" value="" style="font-size: 30pt; font-weight: bold"/>
                  </div>
           </div>
             <div sclass="total-transactions">
              <div>Total Customers</div>
                  <div style="margin-top: 40px">
-                     <label  style="font-size: 30pt; font-weight: bold">201</label>
+                     <label id="total_customers" style="font-size: 30pt; font-weight: bold">201</label>
                  </div>
           </div>
           <div sclass="total-countries"><div>Total Countries</div>
                  <div style="margin-top: 40px">
-                     <label  style="font-size: 30pt; font-weight: bold">70</label>
+                     <label id="total_countries" value="" style="font-size: 30pt; font-weight: bold"/>
                  </div></div>
           </div>
           <div style="margin-top: 30px">
@@ -65,22 +65,22 @@
              <div sclass="most-popular-item">
                  <div>Item</div>
                  <div style="margin-top: 10px">
-                     <label  style="font-size: 20pt; font-weight: bold">Iphone 13</label>
+                     <label id="item_name" value="" style="font-size: 20pt; font-weight: bold"/>
                  </div>
                  <div style="margin-top: 30px">Number of Sold Units</div>
                  <div style="margin-top: 10px">
-                     <label  style="font-size: 20pt; font-weight: bold">1121</label>
+                     <label id="num_of_sold_units"  style="font-size: 30pt; font-weight: bold"/>
                  </div>
              </div>          
           <div sclass="total-transactions">
               <div>Number of Transactions</div>
-                 <div style="margin-top: 80px">
-                     <label  style="font-size: 30pt; font-weight: bold">120</label>
+                 <div style="margin-top: 100px">
+                     <label id="num_of_transactions"  style="font-size: 30pt; font-weight: bold"/>
                  </div></div>
           <div sclass="total-countries">
               <div>Number of Countries</div>
-                 <div style="margin-top: 80px">
-                     <label  style="font-size: 30pt; font-weight: bold">11</label>
+                 <div style="margin-top: 100px">
+                     <label id="num_of_countries"  style="font-size: 30pt; font-weight: bold"/>
                  </div>
           </div>
           </div>

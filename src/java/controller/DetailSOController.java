@@ -102,6 +102,8 @@ public class DetailSOController extends SelectorComposer<Component> {
     @Listen(Events.ON_CLICK + "=#btnSave")
     public void btnSave_onClick(){
         
+        if(!item_id.getValue().isEmpty()){
+        
             HashMap<String, Object> map = new HashMap<String, Object>();
                
         if (!args.containsKey("pid")){    
@@ -128,7 +130,9 @@ public class DetailSOController extends SelectorComposer<Component> {
             Messagebox.show(map.get("outmsg").toString());
         }
             winDetailSalesOrder.detach();
-            getMasterSOController().showListDetailSO();
+            getMasterSOController().showListDetailSO();} else {
+        Messagebox.show("Input Item First, Please");
+        }
                         
     }
     

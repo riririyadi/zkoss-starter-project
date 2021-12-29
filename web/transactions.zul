@@ -49,21 +49,44 @@
             cursor: pointer;
             text-shadow: 1px 1px 1px #59ACC1;
         }
-        tr.z-listitem-over-seld {background: #84C5D6;}        
-
+        tr.z-listitem-over-seld {background: #84C5D6;}  
+        
+        .div{
+            display:flex;
+            align-items: center;
+            justify-content: start;   
+        }
+        .z-textbox-disd, .z-textbox-disd * { color: black !important;}
+.z-datebox .z-datebox-img {
+border: none;
+}
     </style>
-<div style="padding: 20px" apply="controller.ListTransactionsController">
+<div style="padding: 20px" id="transactions_div" 
+     apply="controller.ListTransactionsController">
           <label sclass="transaction-label">Transactions</label>
                        <div style="margin: 20px 0px; display: flex; justify-content: space-between">
                             <div>
                                 <button id="btnNewHeaderSO"  sclass="btnNew"   image="/img/New24.png"     tooltiptext="New"/>
                                 <button id="btnRefreshHeaderSO" sclass="btnRefresh"  image="/img/Refresh24.png" tooltiptext="Refresh" />
+                                <button  sclass="btnFind"   image="/img/filter-24.png"    tooltiptext="Filter" onClick="div.visible=!div.visible" visible="true"/>
                             </div>
                         <div>
-                            <button id="btnFindHeaderSO"   sclass="btnFind"   image="/img/Find24.png"    tooltiptext="Find"  visible="true"/>
+                            <label style="margin-right: 10px">Search keyword</label>
                             <textbox id="searchHeaderSO" sclass="search"/>  
+                            <button id="btnFindHeaderSO"   sclass="btnFind"   image="/img/Find24.png"    tooltiptext="Find"  visible="true"/>
                         </div>
                     </div>
+                    
+                            <div id="div" sclass="div" visible="false" style="margin-bottom: 20px;">
+                           
+                                    <label style="margin-right: 10px">Customer</label><textbox id="customer_id" sclass="search" visible="false" disabled="true"/><textbox id="customer_code" sclass="search" width="50px" style="margin-right: 5px" disabled="true" visible="true"/>
+                                    <textbox id="customer_description" sclass="search" disabled="true"/>
+                                    <button id="btnLovCustomer" sclass="btnFind" label="...Show List"  style="padding: 6px 10px; margin-left: 10px; margin-right: 20px"/>
+                                    <label style="margin-right: 10px">Start Date</label><datebox id="start_date" sclass="search" format="dd-MM-yyyy"  style="border:none ;  margin-right: 20px"/>
+                                    <label style="margin-right: 10px">End Date</label><datebox id="end_date" sclass="search" format="dd-MM-yyyy" style="border:none;  margin-right: 20px"/>
+                                    <button sclass="btnFind" id="btnDoFilter" style="padding: 6px 10px" label="Filter"/>
+                              
+                            </div>
 
                   <div sclass="listbox-wrapper">
                     <listbox id="listboxHeaderSO" vflex="1" mold="paging" autopaging="true" style="border: none; background: white"  height="380px" >

@@ -118,9 +118,11 @@ public class CustomerController extends SelectorComposer<Component> {
     public void btnSave_onClick(){
         
         HashMap<String, Object> map = new HashMap<String, Object>();
-       
         
-         if (!args.containsKey("pid")) 
+        if (!country_id.getValue().isEmpty() && !province_id.getValue().isEmpty() && 
+                !city_id.getValue().isEmpty() && !company_id.getValue().isEmpty()
+                ){
+           if (!args.containsKey("pid")) 
         {
             map.put("pcustomer_code", customer_code.getValue().isEmpty() ? null : customer_code.getText());
             map.put("pcustomer_description", customer_description.getValue().isEmpty()? null : customer_description.getText());
@@ -157,6 +159,11 @@ public class CustomerController extends SelectorComposer<Component> {
         }
             entry_customer.detach();
             getListCustomersController().showListCustomer();
+        } else {
+            Messagebox.show("Fill all the field, Please!");
+        }
+        
+      
          
     }
     
@@ -211,6 +218,10 @@ public class CustomerController extends SelectorComposer<Component> {
     @Listen(Events.ON_CLICK + "=#btnLovProvince")
     public void showLovProvince()
     {
+             if(country_id.getValue().isEmpty()){
+            Messagebox.show("Select Country First, Please!");
+        } else {
+        
         HashMap<String, Object> map = new HashMap<String, Object>();
         LovController composerLov = new LovController();
         
@@ -248,12 +259,16 @@ public class CustomerController extends SelectorComposer<Component> {
         Window w = (Window) Executions.createComponents("/components/lov.zul", null, map);
         w.setParent(entry_customer);
         w.doModal();
-    }
+    }}
     
     
     @Listen(Events.ON_CLICK + "=#btnLovCity")
     public void showLovCity()
     {
+             if(province_id.getValue().isEmpty()){
+            Messagebox.show("Select Province First, Please!");
+        } else {
+        
         HashMap<String, Object> map = new HashMap<String, Object>();
         LovController composerLov = new LovController();
         
@@ -292,7 +307,7 @@ public class CustomerController extends SelectorComposer<Component> {
         w.setParent(entry_customer);
         w.doModal();
     }
-    
+    }
     
     @Listen(Events.ON_CLICK + "=#btnLovCompany")
     public void showLovCompany()

@@ -61,14 +61,15 @@ tr.z-listitem-over-seld {background: #84C5D6;}
                         <button id="btnRefreshCompany" sclass="btnRefresh"  image="/img/Refresh24.png" tooltiptext="Refresh" />
                         </div>
                         <div>
-                        <button id="btnFindCompany"   sclass="btnFind"   image="/img/Find24.png"    tooltiptext="Find"  visible="true"/>
+                             <label style="margin-right: 10px">Search keyword</label>
                         <textbox id="searchCompany" sclass="search"/>  
+                        <button id="btnFindCompany"   sclass="btnFind"   image="/img/Find24.png"    tooltiptext="Find"  visible="true"/>
                         </div>
                     </div>
 
                   <div sclass="listbox-wrapper">
                
-                    <listbox id="listboxCompanies" vflex="1" mold="paging" autopaging="true" style="border: none; background: white" height="380px">
+                    <listbox id="listboxCompanies" vflex="1" style="border: none; background: white" height="380px">
                         <!--<frozen columns="4"/>-->
                         <listhead sizable="true">
                             <listheader style="text-align: center" label="Delete"   align="center"    width="70px"/>                            
@@ -81,6 +82,7 @@ tr.z-listitem-over-seld {background: #84C5D6;}
                             <listheader style="text-align: left" sort="auto(zip_code)"          label="Zip Code"        width="100%"   align="left"    hflex="max"/>
                         </listhead>
                     </listbox>
+                      <paging id="userPaging" width="95%" style="color: black" detailed="true"/>
                      </div> </div>
             <div style="padding: 0; margin-top: 50px">
               <include src="/footer.zul"/>

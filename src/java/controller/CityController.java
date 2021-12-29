@@ -83,6 +83,9 @@ public class CityController extends SelectorComposer<Component>{
     
     @Listen(Events.ON_CLICK + "=#btnSave")
     public void btnSave_onClick(){
+        
+        if(!province_id.getValue().isEmpty()){
+        
         HashMap<String, Object> map = new HashMap<String, Object>();
         
         if (!args.containsKey("pid")) 
@@ -105,7 +108,10 @@ public class CityController extends SelectorComposer<Component>{
             Messagebox.show(map.toString());  
         }
         getListCitiesController().showListCity();
-        entry_city.detach();
+        entry_city.detach();}
+        else {
+         Messagebox.show("Fill all the field, Please!");
+        }
     }
     
     

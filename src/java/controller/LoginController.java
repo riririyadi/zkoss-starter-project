@@ -53,9 +53,9 @@ public class LoginController extends SelectorComposer<Component> {
 		String pd = password.getValue().trim();
 		
 		if(!authService.login(nm,pd)){
+                        login.setLabel("Login");
 			message.setValue("invalid email or password");
                         message.setSclass("login-error");
-                        login.setLabel("Login");
 			return;
 		}
 		

@@ -25,7 +25,7 @@
                 </hbox>
                 <hbox style="margin-right: 111px">
                         <label id="" value="Province Code" style="float: right"/>    
-                        <textbox value="" id="province_code" maxlength="5" constraint="no empty"/>
+                        <textbox value="" id="province_code" maxlength="3" constraint="no empty"/>
                 </hbox>
                 <hbox style="margin-right: 111px">
                         <label id="" value="Province Description" style="float: right"/>

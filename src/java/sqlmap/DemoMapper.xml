@@ -6,6 +6,27 @@
     <select id="getListItems" parameterType="map" resultType="model.Item">
 	Select *
 	From   items
+    
+    </select>
+    
+    
+    <select id="getListMostPopularItem" parameterType="map" resultType="model.MostPopularItem">
+        select 
+	sum(quantity) as num_of_sold_units, 
+	i.description as item_name,
+	json_array_length(json_agg(so_id)) as num_of_transactions,
+	json_array_length(json_agg(distinct c.country_id)) as num_of_countries
+	from detail_so ds 
+		join items i on ds.item_id = i.id 
+		join header_so hs on ds.so_id = hs.id
+		join customers c on hs.customer_id = c.id
+	group by i.description order by num_of_sold_units desc;
+    </select>
+    
+    <select id="onCountTotalItems" parameterType="map" resultType="Integer">
+	Select count(1) as total_record
+	From   items
+    
     </select>
     
     
@@ -19,8 +40,23 @@
             <bind name="pattern" value="'%' + psearch + '%'" />
               WHERE LOWER(description) LIKE #{pattern} OR LOWER(code) LIKE #{pattern}
         </if>
-	
+	 	    Limit #{pageSize} Offset ((#{pageNumber}-1)*#{pageSize})
+
          
+    </select>
+
+
+     <select id="onCountItems" parameterType="map" resultType="Integer">
+        
+        SELECT
+	count(1) as total_record
+        FROM
+	ITEMS
+        <if test="psearch != null">
+            <bind name="pattern" value="'%' + psearch + '%'" />
+                WHERE LOWER(description) LIKE #{pattern} OR LOWER(code) LIKE #{pattern}
+        </if>
+        
     </select>
 
             
@@ -63,6 +99,7 @@
 	Select c.id as id, province_id, province_code, province_description, city_code, city_description
 	From   cities c inner join provinces p on c.province_id = p.id
     </select>
+ 
     
     <select id="findListCities" parameterType="map" resultType="model.City">
         
@@ -74,9 +111,24 @@
             <bind name="pattern" value="'%' + psearch + '%'" />
               WHERE LOWER(city_description) LIKE #{pattern} OR LOWER(city_code) LIKE #{pattern}
         </if>
-	
+	   Limit #{pageSize} Offset ((#{pageNumber}-1)*#{pageSize})
          
     </select>
+    
+    
+      <select id="onCountCities" parameterType="map" resultType="Integer">
+        
+        SELECT
+	count(1) as total_record
+        FROM
+	Cities
+        <if test="psearch != null">
+            <bind name="pattern" value="'%' + psearch + '%'" />
+                WHERE LOWER(city_description) LIKE #{pattern} OR LOWER(city_code) LIKE #{pattern}
+        </if>
+        
+    </select>
+    
     
      <select id="cities_oninsert" parameterType="map" statementType="CALLABLE">
     	{ CALL cities_oninsert(
@@ -118,7 +170,7 @@
         join cities ct on cmp.city_id = ct.id
     </select>
     
-    <select id="findListCompanies" parameterType="map" resultType="model.City">
+    <select id="findListCompanies" parameterType="map" resultType="model.Company">
         
         SELECT
 	* 
@@ -129,9 +181,23 @@
               WHERE LOWER(company_description) LIKE #{pattern} OR LOWER(company_code) LIKE #{pattern}
         </if>
 	
-         
+             Limit #{pageSize} Offset ((#{pageNumber}-1)*#{pageSize})
     </select>
     
+    
+    <select id="onCountCompanies" parameterType="map" resultType="Integer">
+        
+        SELECT
+	count(1) as total_record
+        FROM
+	companies
+        <if test="psearch != null">
+            <bind name="pattern" value="'%' + psearch + '%'" />
+              WHERE LOWER(company_description) LIKE #{pattern} OR LOWER(company_code) LIKE #{pattern}
+        </if>
+	
+         
+    </select>
     <select id="companies_oninsert" parameterType="map" statementType="CALLABLE">
     	{ CALL companies_oninsert(
                 #{pcompany_code,                   mode=IN,  jdbcType=VARCHAR},
@@ -193,9 +259,31 @@
               WHERE LOWER(country_code) LIKE #{pattern} OR LOWER(country_description) LIKE #{pattern}
         </if>
 	
+	Limit #{pageSize} Offset ((#{pageNumber}-1)*#{pageSize})
     </select>
 
+     <select id="onCountCountries" parameterType="map" resultType="Integer">
+        
+        SELECT
+	count(1) as total_record
+        FROM
+	countries
+        <if test="psearch != null">
+            <bind name="pattern" value="'%' + psearch + '%'" />
+              WHERE LOWER(country_code) LIKE #{pattern} OR LOWER(country_description) LIKE #{pattern}
+        </if>
+    </select>
     
+    
+     <select id="onCountTotalCountries" parameterType="map" resultType="Integer">
+        
+        SELECT
+	count(1) as total_record
+        FROM
+	countries
+   
+    </select>
+
     
     <select id="countries_oninsert" parameterType="map" statementType="CALLABLE">
     	{ CALL countries_oninsert(
@@ -236,6 +324,16 @@
     </select>
     
     
+    
+     <select id="onCountTotalCustomers" parameterType="map" resultType="Integer">
+        
+        SELECT
+	count(1) as total_record
+        FROM
+	customers
+   
+    </select>
+    
     <select id="findListCustomers" parameterType="map" resultType="model.Customer">
         
         SELECT
@@ -244,7 +342,21 @@
 	customers
         <if test="psearch != null">
             <bind name="pattern" value="'%' + psearch + '%'" />
-              WHERE LOWER(customer_description) LIKE #{pattern} OR LOWER(customer_code) LIKE #{pattern}
+            WHERE LOWER(customer_description) LIKE #{pattern} OR LOWER(customer_code) LIKE #{pattern}
+        </if>
+            Limit #{pageSize} Offset ((#{pageNumber}-1)*#{pageSize})
+         
+    </select>
+    
+     <select id="onCountCustomers" parameterType="map" resultType="Integer">
+        
+        SELECT
+	count(1) as total_record
+        FROM
+        customers
+        <if test="psearch != null">
+            <bind name="pattern" value="'%' + psearch + '%'" />
+                WHERE LOWER(customer_description) LIKE #{pattern} OR LOWER(customer_code) LIKE #{pattern}
         </if>
 	
          
@@ -316,7 +428,20 @@
             <bind name="pattern" value="'%' + psearch + '%'" />
               WHERE LOWER(province_code) LIKE #{pattern} OR LOWER(province_description) LIKE #{pattern}
         </if>
-	
+	   Limit #{pageSize} Offset ((#{pageNumber}-1)*#{pageSize})
+    </select>
+    
+     <select id="onCountProvinces" parameterType="map" resultType="Integer">
+        
+        SELECT
+	count(1) as total_record
+        FROM
+	Provinces
+        <if test="psearch != null">
+            <bind name="pattern" value="'%' + psearch + '%'" />
+               WHERE LOWER(province_code) LIKE #{pattern} OR LOWER(province_description) LIKE #{pattern}
+        </if>
+        
     </select>
     
      <select id="provinces_oninsert" parameterType="map" statementType="CALLABLE">
@@ -357,7 +482,35 @@
 	select hs.*, customer_code, customer_description 
          from header_so hs left join customers cm on hs.customer_id = cm.id
     </select>
-        
+    
+       
+    <select id="onCountTotalHeaderSO" parameterType="map" resultType="Integer">
+	Select count(1) as total_record
+	From   header_so
+    
+    </select>
+    
+     <select id="getListHeaderSObyFilter" parameterType="map" resultType="model.HeaderSO">
+	SELECT hs.*, customer_code, customer_description 
+         from header_so hs left join customers cm on hs.customer_id = cm.id
+         <where>
+                <if test="pcustomer_id != null">
+                    hs.customer_id = #{pcustomer_id}
+                </if>
+                    <if test="pstart_date != null">
+                    <!--<trim prefix="WHERE" prefixOverrides="AND">-->
+                        AND hs.so_date  &gt;= #{pstart_date}::timestamp
+                    <!--</trim>-->
+                    </if>
+                    <if test="pend_date != null">
+<!--                    <trim prefix="WHERE" prefixOverrides="AND">-->
+                        AND hs.so_date &lt;  #{pend_date}::timestamp
+                    <!--</trim>-->
+                    </if>
+            </where>
+    </select>
+          
+                      
      <select id="header_so_oninsert" parameterType="map" statementType="CALLABLE">
     	{ CALL header_so_oninsert(
                 #{pso_number,                     mode=IN,  jdbcType=VARCHAR},

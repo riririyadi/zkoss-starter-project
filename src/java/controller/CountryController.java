@@ -15,6 +15,7 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
+import org.zkoss.zul.event.PagingEvent;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -48,7 +49,9 @@ public class CountryController extends SelectorComposer<Component>{
 
     Map args;
     
-     @Override
+    int totalSize = 0;
+    
+    @Override
     public void doAfterCompose(Component comp) throws Exception 
     {
         super.doAfterCompose(comp);        
@@ -62,7 +65,7 @@ public class CountryController extends SelectorComposer<Component>{
 	}
         if (!args.containsKey("pid")) 
         {
-        	 entry_country.setTitle("Add Country");              
+        	entry_country.setTitle("Add Country");              
         }
         else 
         {
@@ -73,6 +76,9 @@ public class CountryController extends SelectorComposer<Component>{
         }
     }
     
+   
+    
+    
     @Listen(Events.ON_CLICK + "=#btnSave")
     public void btnSave_onClick(){
  
@@ -81,11 +87,11 @@ public class CountryController extends SelectorComposer<Component>{
         {
             map.put("pcountry_code", country_code.getValue().isEmpty() ? null : country_code.getText());        
             map.put("pcountry_description", country_description.getValue().isEmpty() ? null : country_description.getText());
-            Messagebox.show(map.toString());
+     
             imp.countries_oninsert(map);
             Messagebox.show(map.get("outmsg").toString());
             entry_country.detach();
-             getListCountriesController().showListCountry();
+            getListCountriesController().showListCountry();
         
           
         }
@@ -101,7 +107,7 @@ public class CountryController extends SelectorComposer<Component>{
             showLog(map, "sesudah");
             
             Messagebox.show(map.get("outmsg").toString());     	
-                 getListCountriesController().showListCountry();
+            getListCountriesController().showListCountry();
         
         }
      

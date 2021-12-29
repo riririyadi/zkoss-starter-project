@@ -17,6 +17,7 @@ import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zk.ui.select.impl.ParseException;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
@@ -24,8 +25,10 @@ import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.ListitemRenderer;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Paging;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
+import org.zkoss.zul.event.PagingEvent;
 
 /**
  *
@@ -49,6 +52,9 @@ public class ListCitiesController extends SelectorComposer<Component>{
     @Wire
     Textbox searchCity;
     
+    @Wire
+    Paging userPaging;
+    
     List<City> listCity, listSearchCity;
     
     DemoImplement imp = new DemoImplement();
@@ -60,6 +66,31 @@ public class ListCitiesController extends SelectorComposer<Component>{
         showListCity();        
     }
 
+    Integer totalRecord = 0;    
+    Integer pageSize = 10;
+    Integer currentPage = 1;
+
+     
+     @Listen(Events.ON_OK + "= #searchCity")
+   public void searchCountryListener(){
+     HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("psearch", searchCity.getValue());
+        totalRecord = imp.onCountCities(map);
+        System.out.println("total record " + totalRecord.toString());
+        userPaging.setTotalSize(totalRecord);
+//        pageSize = listboxCountries.getPageSize();
+        userPaging.setPageSize(10);
+        showListCityonDemand(searchCity.getValue());
+
+        
+   }
+    
+     @Listen("onPaging=#userPaging")
+    public void onPagingUserPaging(PagingEvent pe) throws ParseException{
+      currentPage = pe.getActivePage() + 1;
+      showListCityonDemand(searchCity.getValue());
+    }
+    
     @Listen(Events.ON_CLICK + "=#btnNewCity")
     public void btnNewCity_OnClick(Event e)
     {
@@ -100,21 +131,35 @@ public class ListCitiesController extends SelectorComposer<Component>{
 
     
     
-    @Listen(Events.ON_OK + "= #searchCity")
-    public void searchCityListener(){
-       if(searchCity.getValue().isEmpty()){
-           listSearchCity = null;
-       } 
-       else {
-        HashMap<String, Object> map = new HashMap<String, Object>();
-        map.put("psearch", searchCity.getText());
-            listSearchCity = imp.findListCity(map);
-       }
-          
+//    @Listen(Events.ON_OK + "= #searchCity")
+//    public void searchCityListener(){
+//       if(searchCity.getValue().isEmpty()){
+//           listSearchCity = null;
+//       } 
+//       else {
+//        HashMap<String, Object> map = new HashMap<String, Object>();
+//        map.put("psearch", searchCity.getText());
+//            listSearchCity = imp.findListCity(map);
+//       }
+//          
+//        refreshHeaderCity();
+//        setListboxCityRenderer();
+//   }
+   
+    
+      public void showListCityonDemand(String psearch) 
+    {
+        HashMap<String, Object> mapPaging = new HashMap<String, Object>();
+        mapPaging.put("pageSize", pageSize);        
+        mapPaging.put("pageNumber", currentPage);
+        mapPaging.put("psearch", psearch);
+        listSearchCity = imp.findListCity(mapPaging);
+   
         refreshHeaderCity();
         setListboxCityRenderer();
-   }
-   
+
+    }
+    
     @Listen(Events.ON_CLICK + "= #clearSearchCity")
     public void clearSearchCity(){
        searchCity.setValue("");

@@ -17,6 +17,7 @@ import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zk.ui.select.impl.ParseException;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
@@ -24,8 +25,10 @@ import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.ListitemRenderer;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Paging;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
+import org.zkoss.zul.event.PagingEvent;
 
 /**
  *
@@ -49,6 +52,9 @@ public class ListCompaniesController extends SelectorComposer<Component> {
     @Wire
     Textbox searchCompany;
     
+    @Wire
+    Paging userPaging;
+    
     List<Company> listCompany, listSearchCompany;   
     
     DemoImplement imp = new DemoImplement();
@@ -60,6 +66,46 @@ public class ListCompaniesController extends SelectorComposer<Component> {
         showListCompany();
     }
            
+    
+    Integer totalRecord = 0;    
+    Integer pageSize = 10;
+    Integer currentPage = 1;
+
+     
+    @Listen(Events.ON_OK + "= #searchCompany")
+    public void searchCompanyListener(){
+   
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("psearch", searchCompany.getValue());
+        totalRecord = imp.onCountCompanies(map);
+        System.out.println("total record " + totalRecord.toString());
+        userPaging.setTotalSize(totalRecord);
+//        pageSize = listboxCountries.getPageSize();
+        userPaging.setPageSize(10);
+        showListCompanyonDemand(searchCompany.getValue());
+
+        
+    }
+    
+     @Listen("onPaging=#userPaging")
+    public void onPagingUserPaging(PagingEvent pe) throws ParseException{
+      currentPage = pe.getActivePage() + 1;
+      showListCompanyonDemand(searchCompany.getValue());
+    }
+    
+      public void showListCompanyonDemand(String psearch) 
+    {
+        HashMap<String, Object> mapPaging = new HashMap<String, Object>();
+        mapPaging.put("pageSize", pageSize);        
+        mapPaging.put("pageNumber", currentPage);
+        mapPaging.put("psearch", psearch);
+        listSearchCompany = imp.findListCompany(mapPaging);
+   
+        refreshHeaderCompany();
+        setListboxCompanyRenderer();
+
+    }
+    
     
        @Listen(Events.ON_CLICK + "=#btnNewCompany")
     public void btnNewCompany_OnClick(Event e)
@@ -73,20 +119,20 @@ public class ListCompaniesController extends SelectorComposer<Component> {
     
     
        
-     @Listen(Events.ON_OK + "= #searchCompany")
-   public void searchCompanyListener(){
-       if(searchCompany.getValue().isEmpty()){
-           listSearchCompany = null;
-       } 
-       else {
-        HashMap<String, Object> map = new HashMap<String, Object>();
-        map.put("psearch", searchCompany.getText());
-            listSearchCompany = imp.findListCompany(map);
-       }
-    
-        refreshHeaderCompany();
-        setListboxCompanyRenderer();
-   }
+//     @Listen(Events.ON_OK + "= #searchCompany")
+//   public void searchCompanyListener(){
+//       if(searchCompany.getValue().isEmpty()){
+//           listSearchCompany = null;
+//       } 
+//       else {
+//        HashMap<String, Object> map = new HashMap<String, Object>();
+//        map.put("psearch", searchCompany.getText());
+//            listSearchCompany = imp.findListCompany(map);
+//       }
+//    
+//        refreshHeaderCompany();
+//        setListboxCompanyRenderer();
+//   }
    
     @Listen(Events.ON_CLICK + "= #clearSearchCompany")
     public void clearSearchCompany(){

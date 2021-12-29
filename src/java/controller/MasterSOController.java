@@ -100,7 +100,7 @@ public class MasterSOController extends SelectorComposer<Component> {
         if (args.containsKey("ModuleMainController")) {
             setListTransactionsController((ListTransactionsController) args.get("ModuleMainController"));
 
-            getListTransactionsController().setMasterSOController(this);
+//            getListTransactionsController().setMasterSOController(this);
                        
 	}
         
@@ -138,6 +138,9 @@ public class MasterSOController extends SelectorComposer<Component> {
     @Listen(Events.ON_CLICK + "=#btnSave")
     public void btnSave_onClick(){
        
+        if(!customer_id.getValue().isEmpty()){
+
+        
         HashMap<String, Object> map = new HashMap<String, Object>();
         
         if(!args.containsKey("pid")){
@@ -174,21 +177,25 @@ public class MasterSOController extends SelectorComposer<Component> {
                 mapReturnedValue.put("pstatus", map.get("pstatus"));
                 args = mapReturnedValue;
                 }
-                   
+        } else {
+         Messagebox.show("Input Customer First, Please!");
+        }
     }
      @Listen(Events.ON_CLICK + "= #tambahDetail")
     public void doNewItem() {
-        if(!so_number.getValue().isEmpty())
-        {
-            HashMap<String, Object> map = new HashMap<String, Object>();
-            map.put("pso_number", so_number.getValue().isEmpty()? null : so_number.getText());        
-            map.put("pso_id", args.get("pid"));
-            map.put("ModuleMainController", this);
+        if(so_number.getValue().isEmpty()){
+            return;    
+        }
+        
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("pso_number", so_number.getValue().isEmpty()? null : so_number.getText());        
+        map.put("pso_id", args.get("pid"));
+        map.put("ModuleMainController", this);
 
-            final Window window = (Window) Executions.createComponents("/components/detail_so.zul", null, map);
-            window.doHighlighted();
-            window.setPosition("center");
-        } else {}
+        final Window window = (Window) Executions.createComponents("/components/detail_so.zul", null, map);
+        window.doHighlighted();
+        window.setPosition("center");
+       
        
     }
     
@@ -412,7 +419,7 @@ public class MasterSOController extends SelectorComposer<Component> {
 
 //        composerLov.setEventListener((EventListener) (Event t) -> {
 //        });
-        composerLov.setTitle("List of Cities");
+        composerLov.setTitle("List of Customers");
         composerLov.setWidth("500px");
         composerLov.setHeight("350px");
         composerLov.setPageSize(10);

@@ -61,24 +61,24 @@ tr.z-listitem-over-seld {background: #84C5D6;}
                         <button id="btnRefreshCountry" sclass="btnRefresh"  image="/img/Refresh24.png" tooltiptext="Refresh" />
                         </div>
                         <div>
-                        <button id="btnFindCountry"   sclass="btnFind"   image="/img/Find24.png"    tooltiptext="Find"  visible="true"/>
+                             <label style="margin-right: 10px">Search keyword</label>
                         <textbox id="searchCountry" sclass="search"/>  
+                        <button id="btnFindCountry"   sclass="btnFind"   image="/img/Find24.png"    tooltiptext="Find"  visible="true"/>
                         </div>
                     </div>
 
                   <div sclass="listbox-wrapper">
                
-                    <listbox id="listboxCountries" vflex="1" mold="paging" autopaging="true" style="border: none; background: white" height="380px">
+                    <listbox id="listboxCountries" vflex="1"  style="border: none; background: white" height="380px">
                         <!--<frozen columns="4"/>-->
                         <listhead sizable="true">
                             <listheader style="text-align: center" label="Delete"   align="center"    width="70px"/>                            
                             <listheader style="text-align: center" label="Update"   align="center"    width="70px"/>
                             <listheader style="text-align: left" sort="auto(country_code)"          label="Country Code"     width="100px"       align="left"    hflex="max"/>
                             <listheader style="text-align: left" sort="auto(country_description)"   label="Country Description"     width="100%" align="left"    hflex="max"/>
-                           
-
                         </listhead>
                     </listbox>
+                        <paging id="userPaging" width="85%" style="color: black" detailed="true"/>
                     </div>
                     </div>
             <div style="padding: 0; margin-top: 50px">

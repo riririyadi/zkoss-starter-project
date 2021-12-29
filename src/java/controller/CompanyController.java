@@ -113,7 +113,9 @@ public class CompanyController extends SelectorComposer<Component>{
     
     @Listen(Events.ON_CLICK + "=#btnSave")
     public void btnSave_onClick(){
-        
+        if (!country_id.getValue().isEmpty() && !province_id.getValue().isEmpty() && 
+                !city_id.getValue().isEmpty()
+                ){
         
         HashMap<String, Object> map = new HashMap<String, Object>();
         if (!args.containsKey("pid")) 
@@ -150,7 +152,9 @@ public class CompanyController extends SelectorComposer<Component>{
         Messagebox.show(map.get("outmsg").toString());
         }
            getListCompaniesController().showListCompany();
-        entry_company.detach();
+        entry_company.detach();}else{
+                 Messagebox.show("Fill all the field, Please!");
+        }
     }
     
     
@@ -202,6 +206,10 @@ public class CompanyController extends SelectorComposer<Component>{
     @Listen(Events.ON_CLICK + "=#btnLovProvince")
     public void showLovProvince()
     {
+        if(country_id.getValue().isEmpty()){
+            Messagebox.show("Select Country First, Please!");
+        } else {
+        
         HashMap<String, Object> map = new HashMap<String, Object>();
         LovController composerLov = new LovController();
         
@@ -239,12 +247,17 @@ public class CompanyController extends SelectorComposer<Component>{
         Window w = (Window) Executions.createComponents("/components/lov.zul", null, map);
         w.setParent(entry_company);
         w.doModal();
+        }
     }
     
     
     @Listen(Events.ON_CLICK + "=#btnLovCity")
     public void showLovCity()
     {
+        
+        if(province_id.getValue().isEmpty()){
+            Messagebox.show("Select Province First, Please!");
+        } else {
         HashMap<String, Object> map = new HashMap<String, Object>();
         LovController composerLov = new LovController();
         
@@ -282,6 +295,7 @@ public class CompanyController extends SelectorComposer<Component>{
         Window w = (Window) Executions.createComponents("/components/lov.zul", null, map);
         w.setParent(entry_company);
         w.doModal();
+        }
     }
     
 }

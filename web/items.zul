@@ -59,13 +59,14 @@
                         <button id="btnRefreshItem" sclass="btnRefresh"  image="/img/Refresh24.png" tooltiptext="Refresh" />
                         </div>
                         <div>
-                        <button id="btnFindItem"   sclass="btnFind"   image="/img/Find24.png"    tooltiptext="Find"  visible="true"/>
+                             <label style="margin-right: 10px">Search keyword</label>
                         <textbox id="searchItem" sclass="search"/>  
+                        <button id="btnFindItem"   sclass="btnFind"   image="/img/Find24.png"    tooltiptext="Find"  visible="true"/>
                         </div>
                     </div>
 
                   <div sclass="listbox-wrapper">
-                    <listbox id="listboxItems" vflex="1" mold="paging" autopaging="true" style="border: none; background-color: #f8f8f8" height="380px" >
+                    <listbox id="listboxItems" vflex="1"  style="border: none; background-color: #f8f8f8" height="380px" >
                         <!--<frozen columns="4"/>-->
                         <listhead sizable="true">
                             <listheader style="text-align: center" label="Delete"   align="center"    width="70px"/>                            
@@ -76,6 +77,7 @@
                             <listheader style="text-align: left" sort="auto(price)"   label="Price (Rp)"  width="100%"   align="left"    hflex="max"/>
                         </listhead>
                     </listbox>
+                      <paging id="userPaging" width="98%" style="color: black" detailed="true"/>
                 </div>
         </div>
             <div style="padding: 0; margin-top: 50px">

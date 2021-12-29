@@ -80,6 +80,8 @@ if (args.containsKey("ModuleMainController")) {
     
     @Listen(Events.ON_CLICK + "=#btnSave")
     public void btnSave_onClick(){
+        if(!country_id.getValue().isEmpty()){
+            
         HashMap<String, Object> map = new HashMap<String, Object>();
         
          if (!args.containsKey("pid")) 
@@ -106,6 +108,8 @@ if (args.containsKey("ModuleMainController")) {
        
         entry_province.detach();
         getListProvinceController().showListProvince();
+        } } else {
+         Messagebox.show("Fill all the field, Please!");
         }
       
 

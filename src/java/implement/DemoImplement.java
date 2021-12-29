@@ -16,6 +16,7 @@ import model.Country;
 import model.Customer;
 import model.DetailSO;
 import model.HeaderSO;
+import model.MostPopularItem;
 import model.Province;
 import model.User;
 import model.Users;
@@ -46,6 +47,37 @@ public class DemoImplement
         }
         return list;
     }
+    
+    public Integer onCountTotalCountries() 
+    {
+        Integer jumlah;
+        SqlSession session = sqlSessionFactory.openSession();
+        try 
+        {
+            jumlah = session.selectOne("mapper.onCountTotalCountries");
+        } 
+        finally 
+        {
+            session.close();
+        }
+        return jumlah;
+    }
+    
+    public Integer onCountCountries(Map map) 
+    {
+        Integer jumlah;
+        SqlSession session = sqlSessionFactory.openSession();
+        try 
+        {
+            jumlah = session.selectOne("mapper.onCountCountries", map);
+        } 
+        finally 
+        {
+            session.close();
+        }
+        return jumlah;
+    }
+    
     
       public List<Country> findListCountry(Map map) 
     {
@@ -120,6 +152,20 @@ public class DemoImplement
     
     }
     
+     public List<MostPopularItem> getListMostPopularItem() 
+    {
+        List<MostPopularItem> list;
+        SqlSession session = sqlSessionFactory.openSession();
+        try 
+        {
+            list = session.selectList("mapper.getListMostPopularItem");
+        } 
+        finally 
+        {
+            session.close();
+        }
+        return list;
+    }
     
     public List<Item> getListItem() 
     {
@@ -152,6 +198,35 @@ public class DemoImplement
         return list;
     }
     
+      public Integer onCountItems(Map map) 
+    {
+        Integer jumlah;
+        SqlSession session = sqlSessionFactory.openSession();
+        try 
+        {
+            jumlah = session.selectOne("mapper.onCountItems", map);
+        } 
+        finally 
+        {
+            session.close();
+        }
+        return jumlah;
+    }
+      
+         public Integer onCountTotalItems() 
+    {
+        Integer jumlah;
+        SqlSession session = sqlSessionFactory.openSession();
+        try 
+        {
+            jumlah = session.selectOne("mapper.onCountTotalItems");
+        } 
+        finally 
+        {
+            session.close();
+        }
+        return jumlah;
+    }
     
     public Map items_oninsert(Map map) 
     {
@@ -226,6 +301,20 @@ public class DemoImplement
         return list;
     }
     
+      public Integer onCountProvinces(Map map) 
+    {
+        Integer jumlah;
+        SqlSession session = sqlSessionFactory.openSession();
+        try 
+        {
+            jumlah = session.selectOne("mapper.onCountProvinces", map);
+        } 
+        finally 
+        {
+            session.close();
+        }
+        return jumlah;
+    }
       
     public List<Province> findListProvince(Map map) 
     {
@@ -317,6 +406,22 @@ public class DemoImplement
         return list;
     }
     
+        public Integer onCountCities(Map map) 
+    {
+        Integer jumlah;
+        SqlSession session = sqlSessionFactory.openSession();
+        try 
+        {
+            jumlah = session.selectOne("mapper.onCountCities", map);
+        } 
+        finally 
+        {
+            session.close();
+        }
+        return jumlah;
+    }
+      
+     
      public List<City> findListCity(Map map) 
     {
         List<City> list;
@@ -404,6 +509,21 @@ public class DemoImplement
         return list;
     }
     
+        public Integer onCountCompanies(Map map) 
+        {
+        Integer jumlah;
+        SqlSession session = sqlSessionFactory.openSession();
+        try 
+        {
+            jumlah = session.selectOne("mapper.onCountCompanies", map);
+        } 
+        finally 
+        {
+            session.close();
+        }
+        return jumlah;
+        }
+      
     
      public List<Company> findListCompany(Map map) 
     {
@@ -492,6 +612,38 @@ public class DemoImplement
         }
         return list;
     }
+    
+        public Integer onCountTotalCustomers() 
+    {
+        Integer jumlah;
+        SqlSession session = sqlSessionFactory.openSession();
+        try 
+        {
+            jumlah = session.selectOne("mapper.onCountTotalCustomers");
+        } 
+        finally 
+        {
+            session.close();
+        }
+        return jumlah;
+    }
+    
+    
+     public Integer onCountCustomers(Map map) 
+        {
+        Integer jumlah;
+        SqlSession session = sqlSessionFactory.openSession();
+        try 
+        {
+            jumlah = session.selectOne("mapper.onCountCustomers", map);
+        } 
+        finally 
+        {
+            session.close();
+        }
+        return jumlah;
+        }
+      
     
     
     public List<Customer> findListCustomer(Map map) 
@@ -582,7 +734,39 @@ public class DemoImplement
         return list;
     }
     
+            public Integer onCountTotalHeaderSO() 
+    {
+        Integer jumlah;
+        SqlSession session = sqlSessionFactory.openSession();
+        try 
+        {
+            jumlah = session.selectOne("mapper.onCountTotalHeaderSO");
+        } 
+        finally 
+        {
+            session.close();
+        }
+        return jumlah;
+    }
     
+    
+      
+      public List<HeaderSO> getListHeaderSObyFilter(Map map) 
+    {
+        List<HeaderSO> list;
+        SqlSession session = sqlSessionFactory.openSession();
+        try 
+        {
+            list = session.selectList("mapper.getListHeaderSObyFilter", map);
+        } 
+        finally 
+        {
+            session.close();
+        }
+        return list;
+    }
+    
+      
     public Map header_so_oninsert(Map map) 
     {
         SqlSession session = sqlSessionFactory.openSession();
@@ -638,7 +822,7 @@ public class DemoImplement
     }
     
     
-       public List<DetailSO> getListDetailSO(Map map) 
+    public List<DetailSO> getListDetailSO(Map map) 
     {
         List<DetailSO> list;
         SqlSession session = sqlSessionFactory.openSession();
@@ -671,7 +855,7 @@ public class DemoImplement
         return map;
     }
     
-        public Map detail_so_onupdate(Map map) 
+    public Map detail_so_onupdate(Map map) 
     {
         SqlSession session = sqlSessionFactory.openSession();
         try 
@@ -709,7 +893,7 @@ public class DemoImplement
     }
     
 
-           public List<User> login(Map map) 
+    public List<User> login(Map map) 
     {
         List<User> user;
         SqlSession session = sqlSessionFactory.openSession();

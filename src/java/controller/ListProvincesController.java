@@ -13,6 +13,7 @@ import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zk.ui.select.impl.ParseException;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
@@ -20,8 +21,10 @@ import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.ListitemRenderer;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Paging;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
+import org.zkoss.zul.event.PagingEvent;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -46,6 +49,9 @@ public class ListProvincesController extends SelectorComposer<Component>{
     }
     
     @Wire
+    Paging userPaging;
+    
+    @Wire
     Listbox listboxProvinces;
     
     @Wire
@@ -64,6 +70,43 @@ public class ListProvincesController extends SelectorComposer<Component>{
 
     }
     
+      Integer totalRecord = 0;    
+    Integer pageSize = 10;
+    Integer currentPage = 1;
+
+     
+     @Listen(Events.ON_OK + "= #searchProvince")
+   public void searchProvinceListener(){
+     HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("psearch", searchProvince.getValue());
+        totalRecord = imp.onCountProvinces(map);
+        System.out.println("total record " + totalRecord.toString());
+        userPaging.setTotalSize(totalRecord);
+//        pageSize = listboxCountries.getPageSize();
+        userPaging.setPageSize(10);
+        showListProvinceonDemand(searchProvince.getValue());
+
+        
+   }
+    
+     @Listen("onPaging=#userPaging")
+    public void onPagingUserPaging(PagingEvent pe) throws ParseException{
+      currentPage = pe.getActivePage() + 1;
+      showListProvinceonDemand(searchProvince.getValue());
+    }
+    
+      public void showListProvinceonDemand(String psearch) 
+    {
+        HashMap<String, Object> mapPaging = new HashMap<String, Object>();
+        mapPaging.put("pageSize", pageSize);        
+        mapPaging.put("pageNumber", currentPage);
+        mapPaging.put("psearch", psearch);
+        listSearchProvince = imp.findListProvince(mapPaging);
+   
+        refreshHeaderProvince();
+        setListboxProvinceRenderer();
+
+    }
      @Listen(Events.ON_CLICK + "=#btnNewProvince")
     public void btnNewProvince_OnClick(Event e)
     {
@@ -103,19 +146,19 @@ public class ListProvincesController extends SelectorComposer<Component>{
     }
     
      
-       @Listen(Events.ON_OK + "= #searchProvince")
-   public void searchListenerProvince(){
-       if(searchProvince.getValue().isEmpty()){
-           listSearchProvince = null;
-       } 
-       else {
-        HashMap<String, Object> map = new HashMap<String, Object>();
-        map.put("psearch", searchProvince.getText());
-            listSearchProvince = imp.findListProvince(map);
-       }
-        refreshHeaderProvince();
-        setListboxProvinceRenderer();
-   }
+//       @Listen(Events.ON_OK + "= #searchProvince")
+//   public void searchListenerProvince(){
+//       if(searchProvince.getValue().isEmpty()){
+//           listSearchProvince = null;
+//       } 
+//       else {
+//        HashMap<String, Object> map = new HashMap<String, Object>();
+//        map.put("psearch", searchProvince.getText());
+//            listSearchProvince = imp.findListProvince(map);
+//       }
+//        refreshHeaderProvince();
+//        setListboxProvinceRenderer();
+//   }
    
     @Listen(Events.ON_CLICK + "= #clearSearchProvince")
     public void clearSearchProvince(){
@@ -139,7 +182,7 @@ public class ListProvincesController extends SelectorComposer<Component>{
         if(listSearchProvince != null){
             listboxProvinces.setModel(new ListModelList<Province>(listSearchProvince));
         }else{
-        listboxProvinces.setModel(new ListModelList<Province>(listProvince));
+            listboxProvinces.setModel(new ListModelList<Province>(listProvince));
         }
     }
     

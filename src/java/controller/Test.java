@@ -14,6 +14,7 @@ import model.Company;
 import model.DetailSO;
 import model.HeaderSO;
 import model.Item;
+import model.MostPopularItem;
 import model.User;
 import model.Users;
 
@@ -29,8 +30,9 @@ public class Test {
         
         //insert list
      HashMap<String, Object> map = new HashMap<String, Object>();
-                            map.put("pemail", "riririyadii@gmail.com" );
-                            map.put("ppassword", "testing1234" );
+//                            map.put("pcustomer_id", 14 );
+//                            map.put("pstart_date", "25-12-2021" );
+                            map.put("pend_date", "25-12-2021" );
                          
 ////        map.put("pid", 3);
 //        map.put("pcustomer_code", "SPH");
@@ -61,14 +63,15 @@ public class Test {
 //	pemail character varying,
 //	pcompany_id bigint,
         
-       List<User> list = imp.login(map);
+        System.out.println(map);
+        List<MostPopularItem> list = imp.getListMostPopularItem();
 //        
       
 
             
  
         for(int i = 0; i < list.size(); i++){
-            System.out.println("id = " + list.get(i).getId()+ " name = " + list.get(i).getName());
+            System.out.println("item name: " + list.get(i).getItem_name()+ " unit terjual: " + list.get(i).getNum_of_sold_units());
         }
         
         
