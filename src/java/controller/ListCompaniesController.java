@@ -5,6 +5,7 @@
  */
 package controller;
 
+import id.berkah.admin.controller.LovController;
 import implement.DemoImplement;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +20,7 @@ import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.select.impl.ParseException;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Div;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
@@ -50,7 +52,13 @@ public class ListCompaniesController extends SelectorComposer<Component> {
     Listbox listboxCompanies;
     
     @Wire
-    Textbox searchCompany;
+    Div companies_div;
+    
+    @Wire
+    Textbox searchCompany,
+            country_id, country_code, country_description,
+            province_id, province_code, province_description,
+            city_id, city_code, city_description;
     
     @Wire
     Paging userPaging;
@@ -117,6 +125,45 @@ public class ListCompaniesController extends SelectorComposer<Component> {
         window.setPosition("center");
     }
     
+       @Listen("onClick =#btnDoFilter")
+    public void btnDoFilter_onClick(){
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        if(!country_id.getValue().isEmpty()){
+            map.put("pcountry_id", new Long(country_id.getValue()));
+        }
+        if(!province_id.getValue().isEmpty()){
+            map.put("pprovince_id", new Long(province_id.getValue()));
+        }
+        if(!city_id.getValue().isEmpty()){
+            map.put("pcity_id", new Long(city_id.getValue()));
+        } 
+       
+        listSearchCompany = imp.getListCompaniesbyFilter(map);
+        refreshHeaderCompany();
+        setListboxCompanyRenderer();
+    }
+    
+    
+    
+        @Listen("onClick =#btnDoClear")
+    public void btnDoClear_onClick(){
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        country_id.setValue("");        
+        country_code.setValue("");        
+        country_description.setValue("");
+      
+        province_id.setValue("");        
+        province_code.setValue("");        
+        province_description.setValue("");
+
+        city_id.setValue("");        
+        city_code.setValue("");        
+        city_description.setValue("");
+
+        listSearchCompany = null;
+        refreshHeaderCompany();
+        setListboxCompanyRenderer();
+    }
     
        
 //     @Listen(Events.ON_OK + "= #searchCompany")
@@ -255,4 +302,140 @@ public class ListCompaniesController extends SelectorComposer<Component> {
     }
        
     
+        @Listen(Events.ON_CLICK + "=#btnLovCountry")
+    public void showLovCountry()
+    {
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        LovController composerLov = new LovController();
+        
+        String query = "select id, country_code, country_description "
+                      + "from countries "
+                      + "where upper(country_code) like upper('%?%') or upper(country_description) like upper('%?%') "
+                      + "order by country_code "
+                      + "Limit param1 offset param2";
+        
+        composerLov.setQuery(query);
+        composerLov.setQueryTotal("select count(*) from countries where upper(country_code) like upper('%?%') or upper(country_description) like upper('%?%')");
+        composerLov.setSelectedColumn(new int[]{
+            0, 1, 2
+        });
+        composerLov.setColumnWidth(new String[]{
+            "50px", "300px"
+        });
+
+        composerLov.setComponentTransferData(new Textbox[]{
+            country_id, country_code, country_description
+        });
+        composerLov.setHiddenColumn(new int[]{
+            0
+        });
+
+//        composerLov.setEventListener((EventListener) (Event t) -> {
+//        });
+        composerLov.setTitle("List of Countries");
+        composerLov.setWidth("500px");
+        composerLov.setHeight("350px");
+        composerLov.setPageSize(10);
+        map.put("composerLov", composerLov);
+        Window w = (Window) Executions.createComponents("/components/lov.zul", null, map);
+        w.setParent(companies_div);
+        w.doModal();
+    }
+    
+    @Listen(Events.ON_CLICK + "=#btnLovProvince")
+    public void showLovProvince()
+    {
+        if(country_id.getValue().isEmpty()){
+            Messagebox.show("Select Country First, Please!");
+        } else {
+        
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        LovController composerLov = new LovController();
+        
+        String query = "select id, province_code, province_description "
+                      + "from provinces "
+                      + "where country_id = " + country_id.getValue();
+//                      + " And upper(province_code) like upper('%?%') or upper(province_description) like upper('%?%') "
+//                      + "order by province_code"
+//                      + "Limit param1 offset param2";
+        
+        composerLov.setQuery(query);
+        composerLov.setQueryTotal("select count(*) from provinces where country_id = " + country_id.getValue());
+//                + "And upper(province_code) like upper('%?%') or upper(province_description) like upper('%?%')");
+        composerLov.setSelectedColumn(new int[]{
+            0, 1, 2
+        });
+        composerLov.setColumnWidth(new String[]{
+            "50px", "300px"
+        });
+
+        composerLov.setComponentTransferData(new Textbox[]{
+            province_id, province_code, province_description
+        });
+        composerLov.setHiddenColumn(new int[]{
+            0
+        });
+
+//        composerLov.setEventListener((EventListener) (Event t) -> {
+//        });
+        composerLov.setTitle("List of Provinces");
+        composerLov.setWidth("500px");
+        composerLov.setHeight("350px");
+        composerLov.setPageSize(10);
+        map.put("composerLov", composerLov);
+        Window w = (Window) Executions.createComponents("/components/lov.zul", null, map);
+        w.setParent(companies_div);
+        w.doModal();
+        }
+    }
+    
+    
+    @Listen(Events.ON_CLICK + "=#btnLovCity")
+    public void showLovCity()
+    {
+        
+        if(province_id.getValue().isEmpty()){
+            Messagebox.show("Select Province First, Please!");
+        } else {
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        LovController composerLov = new LovController();
+        
+        String query = "select id, city_code, city_description "
+                      + "from cities "
+                      + "where province_id = " + province_id.getValue();
+//                      + " And upper(province_code) like upper('%?%') or upper(province_description) like upper('%?%') "
+//                      + "order by province_code"
+//                      + "Limit param1 offset param2";
+        
+        composerLov.setQuery(query);
+        composerLov.setQueryTotal("select count(*) from cities where province_id = " + province_id.getValue());
+//                + "And upper(province_code) like upper('%?%') or upper(province_description) like upper('%?%')");
+        composerLov.setSelectedColumn(new int[]{
+            0, 1, 2
+        });
+        composerLov.setColumnWidth(new String[]{
+            "50px", "300px"
+        });
+
+        composerLov.setComponentTransferData(new Textbox[]{
+            city_id, city_code, city_description
+        });
+        composerLov.setHiddenColumn(new int[]{
+            0
+        });
+
+//        composerLov.setEventListener((EventListener) (Event t) -> {
+//        });
+        composerLov.setTitle("List of Cities");
+        composerLov.setWidth("500px");
+        composerLov.setHeight("350px");
+        composerLov.setPageSize(10);
+        map.put("composerLov", composerLov);
+        Window w = (Window) Executions.createComponents("/components/lov.zul", null, map);
+        w.setParent(companies_div);
+        w.doModal();
+        }
+    }
+    
+       
 }

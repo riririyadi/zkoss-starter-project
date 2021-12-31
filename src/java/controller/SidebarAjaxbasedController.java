@@ -39,12 +39,9 @@ public class SidebarAjaxbasedController extends SelectorComposer<Component>{
     @Wire
     Grid sidebar;
     
-    
     @Wire
     Button collapsed;
     
-    
-
     //wire service
     SidebarPageConfig pageConfig = new SidebarPageConfigAjaxbasedImpl();
 

@@ -48,6 +48,10 @@ public class LoginController extends SelectorComposer<Component> {
 
 	@Listen("onClick=#login; onOK=#password; onOK=#email" )
 	public void doLogin(){
+                
+            if(email.getValue().isEmpty() || password.getValue().isEmpty()){
+                return;
+            }
                 login.setLabel("Please wait...");
 		String nm = email.getValue().trim();
 		String pd = password.getValue().trim();

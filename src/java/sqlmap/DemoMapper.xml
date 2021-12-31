@@ -170,6 +170,25 @@
         join cities ct on cmp.city_id = ct.id
     </select>
     
+     <select id="getListCompaniesbyFilter" parameterType="map" resultType="model.Company">
+	select cmp.id as id, cmp.*, country_code, country_description, province_code, province_description,
+        city_code, city_description
+        from companies cmp join countries c on cmp.country_id = c.id join provinces p on cmp.province_id = p.id
+        join cities ct on cmp.city_id = ct.id
+         <where>
+                <if test="pcountry_id != null">
+                    cmp.country_id = #{pcountry_id}
+                </if>
+                    <if test="pprovince_id != null">
+                        AND cmp.province_id = #{pprovince_id}
+                    </if>
+                    <if test="pcity_id != null">
+                        AND cmp.city_id = #{pcity_id}
+                    </if>
+                  
+            </where>
+    </select>
+    
     <select id="findListCompanies" parameterType="map" resultType="model.Company">
         
         SELECT
@@ -323,7 +342,27 @@
     join cities ct on cm.city_id = ct.id join companies cmp on cm.company_id = cmp.id
     </select>
     
-    
+      
+     <select id="getListCustomersbyFilter" parameterType="map" resultType="model.Customer">
+	select cm.*, country_code, country_description, province_code, province_description,
+        city_code, city_description, company_code, company_description
+        from customers cm join countries c on cm.country_id = c.id join provinces p on cm.province_id = p.id
+        join cities ct on cm.city_id = ct.id join companies cmp on cm.company_id = cmp.id
+         <where>
+                <if test="pcountry_id != null">
+                    cm.country_id = #{pcountry_id}
+                </if>
+                    <if test="pprovince_id != null">
+                        AND cm.province_id = #{pprovince_id}
+                    </if>
+                    <if test="pcity_id != null">
+                        AND cm.city_id = #{pcity_id}
+                    </if>
+                    <if test="pcompany_id != null">
+                        AND cm.company_id = #{pcompany_id}
+                    </if>
+            </where>
+    </select>
     
      <select id="onCountTotalCustomers" parameterType="map" resultType="Integer">
         
@@ -513,10 +552,10 @@
                       
      <select id="header_so_oninsert" parameterType="map" statementType="CALLABLE">
     	{ CALL header_so_oninsert(
-                #{pso_number,                     mode=IN,  jdbcType=VARCHAR},
                 #{pso_date,                       mode=IN,  jdbcType=VARCHAR},
 	    	#{pcustomer_id,                   mode=IN,  jdbcType=BIGINT},
          	#{pstatus,                        mode=IN, jdbcType=INTEGER},
+                #{pso_number,                     mode=OUT,  jdbcType=VARCHAR},
 	    	#{outid,                          mode=OUT, jdbcType=BIGINT},
 	    	#{outerr,                         mode=OUT, jdbcType=INTEGER},
 	    	#{outmsg,                         mode=OUT, jdbcType=VARCHAR}

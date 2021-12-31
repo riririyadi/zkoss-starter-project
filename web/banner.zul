@@ -39,6 +39,9 @@
             </label>
             <button id="logout" label="Logout" style="margin: 0px 10px"
             if="${not sessionScope.userCredential.anonymous}" sclass="btn-logout"/>
+            <menubar autodrop="true">
+
+</menubar>
             </div>
           
         </div>

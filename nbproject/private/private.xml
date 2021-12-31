@@ -3,39 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/RIRI/Documents/NetBeansProjects/ZkossStarterProject/web/countries.zul</file>
-            <file>file:/C:/Users/RIRI/Documents/NetBeansProjects/ZkossStarterProject/src/java/controller/Test.java</file>
-            <file>file:/C:/Users/RIRI/Documents/NetBeansProjects/ZkossStarterProject/src/java/controller/ListCustomersController.java</file>
-            <file>file:/C:/Users/RIRI/Documents/NetBeansProjects/ZkossStarterProject/src/java/controller/ListItemsController.java</file>
-            <file>file:/C:/Users/RIRI/Documents/NetBeansProjects/ZkossStarterProject/web/companies.zul</file>
-            <file>file:/C:/Users/RIRI/Documents/NetBeansProjects/ZkossStarterProject/src/java/controller/CompanyController.java</file>
-            <file>file:/C:/Users/RIRI/Documents/NetBeansProjects/ZkossStarterProject/src/java/controller/ListCountriesController.java</file>
-            <file>file:/C:/Users/RIRI/Documents/NetBeansProjects/ZkossStarterProject/src/java/controller/ItemController.java</file>
             <file>file:/C:/Users/RIRI/Documents/NetBeansProjects/ZkossStarterProject/web/transactions.zul</file>
-            <file>file:/C:/Users/RIRI/Documents/NetBeansProjects/ZkossStarterProject/src/java/controller/DetailSOController.java</file>
-            <file>file:/C:/Users/RIRI/Documents/NetBeansProjects/ZkossStarterProject/src/java/controller/LoginController.java</file>
-            <file>file:/C:/Users/RIRI/Documents/NetBeansProjects/ZkossStarterProject/src/java/model/MostPopularItem.java</file>
-            <file>file:/C:/Users/RIRI/Documents/NetBeansProjects/ZkossStarterProject/src/java/controller/ListCitiesController.java</file>
-            <file>file:/C:/Users/RIRI/Documents/NetBeansProjects/ZkossStarterProject/src/java/controller/CustomerController.java</file>
-            <file>file:/C:/Users/RIRI/Documents/NetBeansProjects/ZkossStarterProject/src/java/implement/AuthenticationServiceNextImpl.java</file>
-            <file>file:/C:/Users/RIRI/Documents/NetBeansProjects/ZkossStarterProject/web/dashboard.zul</file>
-            <file>file:/C:/Users/RIRI/Documents/NetBeansProjects/ZkossStarterProject/src/java/controller/ListTransactionsController.java</file>
-            <file>file:/C:/Users/RIRI/Documents/NetBeansProjects/ZkossStarterProject/web/components/entry_country.zul</file>
-            <file>file:/C:/Users/RIRI/Documents/NetBeansProjects/ZkossStarterProject/web/items.zul</file>
-            <file>file:/C:/Users/RIRI/Documents/NetBeansProjects/ZkossStarterProject/src/java/controller/CountryController.java</file>
-            <file>file:/C:/Users/RIRI/Documents/NetBeansProjects/ZkossStarterProject/src/java/controller/ProvinceController.java</file>
-            <file>file:/C:/Users/RIRI/Documents/NetBeansProjects/ZkossStarterProject/src/java/controller/MasterSOController.java</file>
-            <file>file:/C:/Users/RIRI/Documents/NetBeansProjects/ZkossStarterProject/web/components/entry_province.zul</file>
-            <file>file:/C:/Users/RIRI/Documents/NetBeansProjects/ZkossStarterProject/src/java/controller/DashboardController.java</file>
-            <file>file:/C:/Users/RIRI/Documents/NetBeansProjects/ZkossStarterProject/src/java/sqlmap/DemoMapper.xml</file>
-            <file>file:/C:/Users/RIRI/Documents/NetBeansProjects/ZkossStarterProject/web/components/entry_company.zul</file>
-            <file>file:/C:/Users/RIRI/Documents/NetBeansProjects/ZkossStarterProject/src/java/implement/DemoImplement.java</file>
-            <file>file:/C:/Users/RIRI/Documents/NetBeansProjects/ZkossStarterProject/web/cities.zul</file>
-            <file>file:/C:/Users/RIRI/Documents/NetBeansProjects/ZkossStarterProject/src/java/controller/ListCompaniesController.java</file>
-            <file>file:/C:/Users/RIRI/Documents/NetBeansProjects/ZkossStarterProject/src/java/controller/CityController.java</file>
-            <file>file:/C:/Users/RIRI/Documents/NetBeansProjects/ZkossStarterProject/web/customers.zul</file>
-            <file>file:/C:/Users/RIRI/Documents/NetBeansProjects/ZkossStarterProject/src/java/controller/ListProvincesController.java</file>
-            <file>file:/C:/Users/RIRI/Documents/NetBeansProjects/ZkossStarterProject/web/provinces.zul</file>
         </group>
     </open-files>
 </project-private>

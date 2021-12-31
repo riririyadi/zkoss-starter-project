@@ -158,14 +158,14 @@ public class MasterSOController extends SelectorComposer<Component> {
                 Integer ranNumber = minimum + ran.nextInt(1000 - 0 + 1);
                 String so_number_now = String.join(".", year.toString(),month.toString(), day.toString(), ranNumber.toString());
 
-                so_number.setValue(so_number_now);
                 status.setValue("Order Accepted");
-                map.put("pso_number", so_number.getValue().isEmpty() ? null : so_number.getText());
+          
                 map.put("pso_date", sd.format(so_date.getValue()));
                 map.put("pcustomer_id", customer_id.getValue().isEmpty() ? null : new Long(customer_id.getText()));
                 map.put("pstatus", 0);
                                 
                 imp.header_so_oninsert(map);
+                so_number.setValue(map.get("pso_number").toString());
                 Messagebox.show(map.get("outmsg").toString());
                 getListTransactionsController().showListHeaderSO();
                 
@@ -185,6 +185,9 @@ public class MasterSOController extends SelectorComposer<Component> {
     public void doNewItem() {
         if(so_number.getValue().isEmpty()){
             return;    
+        }
+        if(status.getValue().equals("Order Approved")){
+            return;
         }
         
         HashMap<String, Object> map = new HashMap<String, Object>();
@@ -229,8 +232,17 @@ public class MasterSOController extends SelectorComposer<Component> {
           
       @Listen(Events.ON_CLICK + "= #btnApprove")
       public void btnApprove_onClick(){
-       
-
+        if(so_number.getValue().isEmpty()){
+            return;
+        }
+        if(listDetailSO.isEmpty()){
+            return;
+        }
+        if(status.getValue().equals("Order Approved")){
+            return;
+        }
+        
+        
             if(args.containsKey("pid")){
               if(args.get("pstatus").equals(0)){
                 Messagebox.show("Approve Order Number "+ args.get("pso_number").toString() +" ?" , 
@@ -259,7 +271,7 @@ public class MasterSOController extends SelectorComposer<Component> {
             
               }
               
-          }else{}
+          }
 
       }
          

@@ -59,7 +59,6 @@ public class CountryController extends SelectorComposer<Component>{
      
         if (args.containsKey("ModuleMainController")) {
 		setListCountriesController((ListCountriesController) args.get("ModuleMainController"));
-		// Set THIS controller BACK TO THE MainController 
 		getListCountriesController().setCountryController(this);
                        
 	}
@@ -92,7 +91,6 @@ public class CountryController extends SelectorComposer<Component>{
             Messagebox.show(map.get("outmsg").toString());
             entry_country.detach();
             getListCountriesController().showListCountry();
-        
           
         }
         else 

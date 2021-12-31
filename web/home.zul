@@ -22,7 +22,7 @@
             <include id="sidebarContent" src="/sidebar.zul"/>
         </west>
         <center id="mainContent"  border="none" style="background: #EFF4F9"  autoscroll="true">
-                <include id="mainArea" src="/mainContent.zul"/>
+             <include id="mainArea" src="/mainContent.zul"/>
         </center>
     </borderlayout>
   

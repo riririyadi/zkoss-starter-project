@@ -509,6 +509,22 @@ public class DemoImplement
         return list;
     }
     
+        public List<Company> getListCompaniesbyFilter(Map map) 
+    {
+        List<Company> list;
+        SqlSession session = sqlSessionFactory.openSession();
+        try 
+        {
+            list = session.selectList("mapper.getListCompaniesbyFilter", map);
+        } 
+        finally 
+        {
+            session.close();
+        }
+        return list;
+    }
+    
+     
         public Integer onCountCompanies(Map map) 
         {
         Integer jumlah;
@@ -605,6 +621,22 @@ public class DemoImplement
         try 
         {
             list = session.selectList("mapper.getListCustomers");
+        } 
+        finally 
+        {
+            session.close();
+        }
+        return list;
+    }
+    
+       
+    public List<Customer> getListCustomersbyFilter(Map map) 
+    {
+        List<Customer> list;
+        SqlSession session = sqlSessionFactory.openSession();
+        try 
+        {
+            list = session.selectList("mapper.getListCustomersbyFilter", map);
         } 
         finally 
         {

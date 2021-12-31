@@ -31,6 +31,13 @@
             overflow: hidden; 
             zoom: 1;
         }
+        
+        .clear{
+            background-color: #ed112a;
+            color: white;
+            margin-left: 5px;
+        }
+        
         tr.z-listitem {background-color:#ffffff;}
         tr.z-listitem td.z-listitem-focus {background-image: none;}
         tr.z-listitem-seld {
@@ -57,37 +64,41 @@
             justify-content: start;   
         }
         .z-textbox-disd, .z-textbox-disd * { color: black !important;}
-.z-datebox .z-datebox-img {
-border: none;
-}
+        .z-datebox .z-datebox-img {
+            border: none;
+        }
+        
+        .filter{
+            background-color: #779DD9;
+            color: white;
+          }     
+                                   
+
     </style>
 <div style="padding: 20px" id="transactions_div" 
      apply="controller.ListTransactionsController">
           <label sclass="transaction-label">Transactions</label>
-                       <div style="margin: 20px 0px; display: flex; justify-content: space-between">
-                            <div>
-                                <button id="btnNewHeaderSO"  sclass="btnNew"   image="/img/New24.png"     tooltiptext="New"/>
-                                <button id="btnRefreshHeaderSO" sclass="btnRefresh"  image="/img/Refresh24.png" tooltiptext="Refresh" />
-                                <button  sclass="btnFind"   image="/img/filter-24.png"    tooltiptext="Filter" onClick="div.visible=!div.visible" visible="true"/>
-                            </div>
+                   <div style="margin: 20px 0px; display: flex; justify-content: space-between">
+                        <div>
+                            <button id="btnNewHeaderSO"  sclass="btnNew"   image="/img/New24.png"     tooltiptext="New"/>
+                            <button id="btnRefreshHeaderSO" sclass="btnRefresh"  image="/img/Refresh24.png" tooltiptext="Refresh" />
+                            <button  sclass="btnFind"   image="/img/filter-24.png"    tooltiptext="Filter" onClick="div.visible=!div.visible" visible="true"/>
+                        </div>  
                         <div>
                             <label style="margin-right: 10px">Search keyword</label>
                             <textbox id="searchHeaderSO" sclass="search"/>  
                             <button id="btnFindHeaderSO"   sclass="btnFind"   image="/img/Find24.png"    tooltiptext="Find"  visible="true"/>
                         </div>
                     </div>
-                    
-                            <div id="div" sclass="div" visible="false" style="margin-bottom: 20px;">
-                           
-                                    <label style="margin-right: 10px">Customer</label><textbox id="customer_id" sclass="search" visible="false" disabled="true"/><textbox id="customer_code" sclass="search" width="50px" style="margin-right: 5px" disabled="true" visible="true"/>
-                                    <textbox id="customer_description" sclass="search" disabled="true"/>
-                                    <button id="btnLovCustomer" sclass="btnFind" label="...Show List"  style="padding: 6px 10px; margin-left: 10px; margin-right: 20px"/>
-                                    <label style="margin-right: 10px">Start Date</label><datebox id="start_date" sclass="search" format="dd-MM-yyyy"  style="border:none ;  margin-right: 20px"/>
-                                    <label style="margin-right: 10px">End Date</label><datebox id="end_date" sclass="search" format="dd-MM-yyyy" style="border:none;  margin-right: 20px"/>
-                                    <button sclass="btnFind" id="btnDoFilter" style="padding: 6px 10px" label="Filter"/>
-                              
-                            </div>
-
+                        <div id="div" sclass="div" visible="false" style="margin-bottom: 20px;">
+                            <label style="margin-right: 10px">Customer</label><textbox id="customer_id" sclass="search" visible="false" disabled="true"/><textbox id="customer_code" sclass="search" width="50px" style="margin-right: 5px" disabled="true" visible="true"/>
+                            <textbox id="customer_description" sclass="search" disabled="true"/>
+                            <button id="btnLovCustomer" sclass="btnFind" label="...Show List"  style="padding: 6px 10px; margin-left: 10px; margin-right: 20px"/>
+                            <label style="margin-right: 10px">Start Date</label><datebox id="start_date" sclass="search" format="dd-MM-yyyy"  style="border:none ;  margin-right: 20px"/>
+                            <label style="margin-right: 10px">End Date</label><datebox id="end_date" sclass="search" format="dd-MM-yyyy" style="border:none;  margin-right: 20px"/>
+                            <button sclass="btnFind filter" id="btnDoFilter" style="padding: 6px 10px" label="Filter"/>
+                            <button sclass="btnFind clear" id="btnDoClear" style="padding: 6px 10px" label="Clear"/>
+                        </div>
                   <div sclass="listbox-wrapper">
                     <listbox id="listboxHeaderSO" vflex="1" mold="paging" autopaging="true" style="border: none; background: white"  height="380px" >
                         <!--<frozen columns="4"/>-->
@@ -96,13 +107,13 @@ border: none;
                             <listheader style="text-align: center"                                 label="Edit"            align="center"  width="70px"/>
                             <listheader style="text-align: center" sort="auto(so_number)"          label="SO Number"       align="left"  width="200px" />
                             <listheader style="text-align: center" sort="auto(so_date)"            label="Order Date"  align="left" width="200px"   />
-                            <listheader style="text-align: center" sort="auto(customer_id)"           label="Customer"        align="left"    hflex="min"/>
+                            <listheader style="text-align: center" sort="auto(customer_description)"           label="Customer"        align="left"   width="200px"/>
                             <listheader style="text-align: center" sort="auto(status)"             label="Status"          align="left"   width="140px" />
                             <listheader style="text-align: left" sort="auto(creation_date)"        label="Created Date"          align="left"   width="100%" hflex="max"/>
-
                         </listhead>
                     </listbox>
-</div></div>
+                    </div>
+                </div>
             <div style="padding: 0; margin-top: 50px">
               <include src="/footer.zul"/>
             </div>

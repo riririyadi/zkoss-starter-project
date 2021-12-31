@@ -24,8 +24,18 @@
             border-radius: 10px; 
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         }
+          
+        .filter{
+            background-color: #779DD9;
+            color: white;
+          }
+          
+        .clear{
+            background-color: #ed112a;
+            color: white;
+        }
         
-      div.z-listbox {
+        div.z-listbox {
             background: #ffffff; 
             border: 1px solid #bbb; 
             overflow: hidden; 
@@ -56,19 +66,41 @@
     <label sclass="customer-label">Customers</label>
              <div style="margin: 20px 0px; display: flex; justify-content: space-between">
                         <div>
-                        <button id="btnNewCustomer"  sclass="btnNew"   image="/img/New24.png"     tooltiptext="New"/>
-                        <button id="btnRefreshCustomer" sclass="btnRefresh"  image="/img/Refresh24.png" tooltiptext="Refresh" />
+                            <button id="btnNewCustomer"  sclass="btnNew"   image="/img/New24.png"     tooltiptext="New"/>
+                            <button id="btnRefreshCustomer" sclass="btnRefresh"  image="/img/Refresh24.png" tooltiptext="Refresh" />
+                            <button  sclass="btnFind"   image="/img/filter-24.png"    tooltiptext="Filter" onClick="div.visible=!div.visible" visible="true" />
                         </div>
                         <div>
                         <label style="margin-right: 10px">Search keyword</label>
-                        <textbox id="searchCustomer" sclass="search"/>  
-                        <button id="btnFindCustomer"   sclass="btnFind"   image="/img/Find24.png"    tooltiptext="Find"  visible="true"/>
-                        
+                            <textbox id="searchCustomer" sclass="search"/>  
+                            <button id="btnFindCustomer"   sclass="btnFind"   image="/img/Find24.png"    tooltiptext="Find"  visible="true"/>
                         </div>
                     </div>
-
+                    <div id="div" sclass="div" visible="false" style="margin-bottom: 20px;">
+                        <label style="margin-right: 10px">Country</label>
+                            <textbox id="country_id" sclass="search" disabled="true" visible="false" width="100px"/>
+                            <textbox id="country_code" sclass="search" disabled="true" visible="false" width="100px"/>
+                            <textbox id="country_description" sclass="search" disabled="true" width="100px"/>
+                        <button id="btnLovCountry" sclass="btnFind" label="..."  image="/img/Find24.png" style="padding: 2px 10px; margin-right: 10px"/>
+                        <label style="margin-right: 10px">Province</label>
+                            <textbox id="province_id" sclass="search"  style="border:none;  margin-right: 10px"  visible="false" width="100px"/>
+                            <textbox id="province_code" sclass="search"  style="border:none;  margin-right: 10px" visible="false" width="100px"/>
+                            <textbox id="province_description" sclass="search"  style="border:none;" width="100px"/>
+                        <button id="btnLovProvince" sclass="btnFind" label="..."  image="/img/Find24.png" style="padding: 2px 10px; margin-right: 10px"/>
+                        <label style="margin-right: 10px">City</label>
+                            <textbox id="city_id" sclass="search"  style="border:none;  margin-right: 5px" visible="false" width="100px"/>
+                            <textbox id="city_code" sclass="search"  style="border:none;  margin-right: 5px" visible="false" width="100px"/>
+                           <textbox id="city_description" sclass="search"  style="border:none;" width="100px"/>
+                        <button id="btnLovCity" sclass="btnFind" label="..."  image="/img/Find24.png" style="padding: 2px 10px; margin-right: 10px"/>
+                        <label style="margin-right: 10px">Company</label>
+                            <textbox id="company_id" sclass="search" style="border:none;  margin-right: 5px" visible="false" width="100px"/>                                        
+                            <textbox id="company_code" sclass="search" style="border:none;  margin-right: 5px" visible="false" width="100px"/>
+                            <textbox id="company_description" sclass="search" style="border:none;"  width="100px"/>
+                        <button id="btnLovCompany" sclass="btnFind" label="..."  image="/img/Find24.png" style="padding: 2px 10px;  margin-right: 20px"/>
+                        <button sclass="btnFind filter" id="btnDoFilter" style="padding: 6px 10px" label="Filter"/>
+                        <button sclass="btnFind clear" id="btnDoClear" style="padding: 6px 10px" label="Clear"/>
+                    </div>
                   <div sclass="listbox-wrapper">
-               
                     <listbox id="listboxCustomers" vflex="1" style="border: none; background: white" height="380px">
                         <!--<frozen columns="4"/>-->
                         <listhead sizable="true">

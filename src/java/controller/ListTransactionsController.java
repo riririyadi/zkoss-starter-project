@@ -78,6 +78,21 @@ public class ListTransactionsController extends SelectorComposer<Component>{
 
     }
     
+        @Listen("onClick =#btnDoClear")
+    public void btnDoClear_onClick(){
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        customer_id.setValue("");        
+        customer_code.setValue("");        
+        customer_description.setValue("");
+        start_date.setValue(null);        
+        end_date.setValue(null);        
+        listSearchHeaderSO = null;
+        refreshHeaderSO();
+        setListboxHeaderSORenderer();
+
+    }
+    
+    
     @Listen(Events.ON_CLICK + "=#btnNewHeaderSO")
     public void btnNewHeaderSO_OnClick(Event e)
     {  
@@ -184,7 +199,7 @@ public class ListTransactionsController extends SelectorComposer<Component>{
 
                 new Listcell(t.getSo_number()).setParent(lstm);
                 new Listcell(sd.format(t.getSo_date())).setParent(lstm);                 
-                new Listcell(t.getCustomer_id().toString()).setParent(lstm);                  
+                new Listcell(t.getCustomer_description()).setParent(lstm);                  
                 new Listcell(t.getStatus().equals(1) ? "Order Approved":"Order Accepted").setParent(lstm);                     
                 new Listcell(sd.format(t.getCreation_date())).setParent(lstm);                
 
